@@ -64,6 +64,7 @@ page 60136 "Rejected Invoice List"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Status field.';
+                    Editable = false;
                 }
                 field(Semester; Rec.Semester)
                 {
