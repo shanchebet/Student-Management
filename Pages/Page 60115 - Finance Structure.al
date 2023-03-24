@@ -69,11 +69,6 @@ page 60115 "Finance Structure"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Transaction Type field.';
                 }
-                // field("Student Category"; Rec."Student Category")
-                // {
-                //     ApplicationArea = All;
-                //     ToolTip = 'Specifies the value of the Student Category field.';
-                // }
                 field("Prepared By"; Rec."Prepared By")
                 {
                     ApplicationArea = All;

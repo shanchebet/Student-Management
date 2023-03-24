@@ -39,8 +39,6 @@ table 60104 Courses
         {
 
             Caption = 'Department Description';
-            // CalcFormula = Lookup("Department"."Department Description" WHERE("Department Code" = FIELD("Department Code")));
-            // FieldClass = FlowField;
         }
 
 

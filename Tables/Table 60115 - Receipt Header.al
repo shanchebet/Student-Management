@@ -97,16 +97,6 @@ table 60115 "Receipt Header"
         {
             DataClassification = CustomerContent;
             Caption = 'Cashier';
-
-            // TableRelation = User."User Name";
-            // ValidateTableRelation = false;
-
-            // trigger OnValidate()
-            // var
-            //     UserSelection: Codeunit "User Selection";
-            // begin
-            //     UserSelection.ValidateUserName(Cashier);
-            // end;
         }
 
         field(11; "Posted"; Boolean)
@@ -181,9 +171,7 @@ table 60115 "Receipt Header"
             MSMSStudentSetup.Get();
             MSMSStudentSetup.TestField("Receipt Nos");
             NoSeriesManagement.InitSeries(MSMSStudentSetup."Receipt Nos", MSMSStudentSetup."Receipt Nos", WorkDate(), "No.", MSMSStudentSetup."Receipt Nos");
-
         end;
-        //"Time Posted" := CreateDateTime(Today, time);
         "Cashier" := UserId;
     end;
 

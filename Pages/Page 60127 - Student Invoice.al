@@ -10,8 +10,10 @@ page 60127 "Student Invoice"
     {
         area(Content)
         {
+
             group(GroupName)
             {
+                Editable = Rec.Posted = false;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -98,7 +100,6 @@ page 60127 "Student Invoice"
             {
                 SubPageLink = "Document No." = FIELD("No.");
                 ApplicationArea = all;
-                //Enabled = Rec.Status = Rec.Status::Open;
                 UpdatePropagation = Both;
             }
         }
@@ -109,22 +110,6 @@ page 60127 "Student Invoice"
         {
             group(Approval)
             {
-                // action(Approve)
-                // {
-                //     ApplicationArea = All;
-                //     Enabled = NOT OpenApprovalEntriesExist AND CanRequestApprovalForFlow;
-                //     Image = Approve;
-                //     Caption = 'Approve';
-                //     PromotedCategory = Category5;
-                //     Promoted = true;
-                //     PromotedIsBig = true;
-
-                //     trigger OnAction()
-                //     begin
-                //         ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);
-                //     end;
-                // }
-
                 action("Send Approval Request")
                 {
                     Image = SendApprovalRequest;
@@ -182,10 +167,10 @@ page 60127 "Student Invoice"
             }
         }
     }
+
+
     trigger OnAfterGetRecord()
-
     begin
-
         OpenApprovalEntriesExistForCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(rec.RecordId);
         OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(rec.RECORDID);
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(rec.RECORDID);
@@ -204,6 +189,7 @@ page 60127 "Student Invoice"
         CanRequestApprovalForFlow: Boolean;
         ReleaseDoc: Codeunit "Document Release";
         InvMgt: Codeunit "Invoice Management";
+        IsPostedInvoices: Boolean;
 
 
 }

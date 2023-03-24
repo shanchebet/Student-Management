@@ -36,8 +36,6 @@ table 60103 Department
         field(4; "School Description"; text[100])
         {
             Caption = 'School Description';
-            // CalcFormula = Lookup("Type of School".Description WHERE("School Code" = FIELD("School Code")));
-            // FieldClass = FlowField;
         }
     }
     keys

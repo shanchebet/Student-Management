@@ -174,13 +174,11 @@ page 60100 "Applicant Registration"
                 {
                     ApplicationArea = All;
                     Visible = OpenApprovalEntriesExistForCurrUser;
-                    //Enabled = NOT OpenApprovalEntriesExist AND CanRequestApprovalForFlow;
                     Image = Approve;
                     Caption = 'Approve';
                     PromotedCategory = Category5;
                     Promoted = true;
                     PromotedIsBig = true;
-
                     trigger OnAction()
                     begin
                         ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);

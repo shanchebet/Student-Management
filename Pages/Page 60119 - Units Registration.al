@@ -74,41 +74,18 @@ page 60119 "Unit Registration"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Semester field.';
-                    // trigger OnValidate()
-                    // var
-                    // // Matrix: Record "Unit Matrix";
-                    // // UnitRegLines: Record "Unit Registration Line";
-                    // // LineNo: Integer;
-                    // begin
-                    //     // LineNo := 10000;
-                    //     // Matrix.Reset();
-                    //     // Matrix.SetRange("Academic Year Code", Rec."Academic Year Code");
-                    //     // Matrix.SetRange("Semester Code", Rec.Semester);
-                    //     // if Matrix.Findset() then
-                    //     //     // repeat
-                    //     //     UnitRegLines.Init();
-                    //     // UnitRegLines."Line No" := LineNo + 10000;
-                    //     // UnitRegLines."Document No." := Rec."No.";
-                    //     // UnitRegLines."Unit Code" := Matrix."Unit Code";
-                    //     // UnitRegLines.Validate("Unit Code");
-                    //     // UnitRegLines."Unit Core/Elective" := Matrix."Unit Core/Elective";
-                    //     // UnitRegLines.Insert();
-                    //     // //until UnitRegLines.Next() = ;
 
-                    // end;
                 }
                 field("Academic Year Code"; Rec."Academic Year Code")
                 {
                     ApplicationArea = All;
                     Editable = false;
-                    //  Editable = false;
                     ToolTip = 'Specifies the value of the Academic Year Code field.';
                 }
                 field("Academic Year Description"; Rec."Academic Year Description")
                 {
                     ApplicationArea = All;
                     Editable = false;
-                    //Editable = false;
                     ToolTip = 'Specifies the value of the Academic Year Description field.';
                 }
             }

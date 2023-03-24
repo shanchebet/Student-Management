@@ -53,15 +53,6 @@ table 60112 "Unit Registration"
         {
             DataClassification = CustomerContent;
             Editable = false;
-            // TableRelation = "Level Of Study";
-
-            // trigger OnValidate()
-            // var
-            //     School: Record "Level Of Study";
-            // begin
-            //     if School.Get("Level Of Study") then
-            //         "LOS Description" := School."LOS Description";
-            // end;
         }
 
         field(5; "Course Of Study"; Text[30])
@@ -69,7 +60,6 @@ table 60112 "Unit Registration"
             DataClassification = CustomerContent;
             Caption = 'Course of Study';
             Editable = false;
-            //TableRelation = Courses where("LOS Code" = FIELD("Level Of Study"));
 
         }
         field(6; "Customer Type"; Enum "Customer Type")
@@ -117,12 +107,6 @@ table 60112 "Unit Registration"
             var
                 SemRec: Record Semester;
             begin
-                // SemRec.Reset();
-                // SemRec.SetRange("Semester Code", Rec.Semester);
-                // if SemRec.Find('-') then begin
-                //     "Academic Year Code" := SemRec." Academic Year Code";
-                //     "Academic Year Description" := SemRec."Academic Year Description";
-                // end;
 
                 //Clear Unit Registration Lines
                 StudMgt.ClearUnitRegistrationLines(Rec);

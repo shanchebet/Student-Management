@@ -28,26 +28,6 @@ table 60117 "Student Invoice"
             Caption = 'Bill-to Student No.';
             NotBlank = true;
             TableRelation = "Student Session"."Student No.";
-            // trigger OnValidate()
-            // var
-            //     StudRec: Record "Student Session";
-            //     CustRec: Record Customer;
-            // begin
-            //     StudRec.Reset();
-            //     StudRec.SetRange("Student No.", "Bill-to Student No.");
-            //     if StudRec.FindFirst() then begin
-            //         "Student Name" := StudRec."Student Name";
-            //         Semester := StudRec."Semester Code";
-            //         "Academic Year Code" := StudRec."Academic Year Code";
-            //     end;
-            //     if CustRec.get("Bill-to Student No.") then begin
-            //         "Course Description" := CustRec."Course Description";
-            //         "Level Of Study" := CustRec."Level Of Study";
-            //         "School Description" := CustRec."School Description";
-            //     end;
-            // end;
-
-
         }
         field(3; "Student Name"; Text[100])
         {
@@ -118,7 +98,6 @@ table 60117 "Student Invoice"
             Clustered = true;
         }
     }
-
 
     var
         MSMSStudentSetup: Record "Student Management Setup";

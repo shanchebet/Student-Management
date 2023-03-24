@@ -18,12 +18,6 @@ page 60122 "Student Session"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Session Code field.';
-                    //  NotBlank = true;
-                    // trigger OnAssistEdit()
-                    // begin
-                    //     if Rec.AssistEdit(xRec) then
-                    //         CurrPage.Update();
-                    // end;
                 }
                 field("Session Description"; Rec."Session Description")
                 {
@@ -105,7 +99,7 @@ page 60122 "Student Session"
                     Rec.TestField("Semester Code");
                     Rec.TestField("Student No.");
                     Rec.Reported := true;
-                    //   Rec.Modify();
+                    Rec.Modify();
                 end;
             }
         }

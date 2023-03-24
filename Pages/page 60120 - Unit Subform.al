@@ -1,8 +1,6 @@
 page 60120 "Units Registration"
 {
     PageType = Listpart;
-    //ApplicationArea = All;
-    //UsageCategory = Lists;
     SourceTable = "Unit Registration Line";
 
     layout
@@ -49,11 +47,6 @@ page 60120 "Units Registration"
                     Editable = false;
 
                 }
-                // field("Course Code"; Rec."Course Code")
-                // {
-                //     ApplicationArea = All;
-                //     ToolTip = 'Specifies the value of the course Code field.';
-                // }
                 field("Course Description"; Rec."Course Description")
                 {
                     ApplicationArea = All;
@@ -81,9 +74,5 @@ page 60120 "Units Registration"
                 }
             }
         }
-
     }
-
-
-
 }

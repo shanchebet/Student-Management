@@ -106,7 +106,6 @@ page 60124 "Receipt Header"
             {
                 SubPageLink = "Document No" = FIELD("No.");
                 ApplicationArea = all;
-                //Enabled = Rec.Status = Rec.Status::Open;
                 UpdatePropagation = Both;
             }
         }
@@ -159,7 +158,6 @@ page 60124 "Receipt Header"
                     PromotedOnly = true;
                     ApplicationArea = All;
                     Enabled = not OpenApprovalEntriesExist;
-                    //Enabled = ("Approval Status " = Status::"Pending Approval") or (Status = Status::Released);
                     trigger OnAction()
                     begin
                         IF ApprovalsMgmtCut.CheckReceiptApprovalsWorkflowEnabled(Rec) then

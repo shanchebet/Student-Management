@@ -4,7 +4,7 @@ page 60135 "Posted Invoice List"
     Caption = 'Posted Invoice List';
     PageType = List;
     SourceTable = "Student Invoice";
-    SourceTableView = where("Status" = filter(Reversed));
+    SourceTableView = where(Posted = const(true));
     UsageCategory = Lists;
     CardPageId = "Student Invoice";
 
@@ -14,6 +14,7 @@ page 60135 "Posted Invoice List"
         {
             repeater(General)
             {
+
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;

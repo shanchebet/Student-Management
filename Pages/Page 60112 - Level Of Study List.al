@@ -24,11 +24,6 @@ page 60112 "level OF Study List"
                     ToolTip = 'Specifies the value of the level of study Description field.';
                     NotBlank = true;
                 }
-                // field("Course Code"; Rec."Course Code")
-                // {
-                //     ApplicationArea = All;
-                //     ToolTip = 'Specifies the value of the Course Code field.';
-                // }
             }
         }
     }

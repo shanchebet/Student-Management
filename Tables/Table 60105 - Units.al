@@ -15,7 +15,6 @@ table 60105 Units
         {
             DataClassification = ToBeClassified;
             Caption = 'Unit Description';
-            //Editable = false;
 
         }
         // field(3; "Course Code"; Code[20])

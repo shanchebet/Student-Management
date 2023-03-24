@@ -14,21 +14,6 @@ table 60113 "Unit Registration Line"
         {
             DataClassification = ToBeClassified;
             Caption = 'Entry No';
-            // TableRelation = "Unit Matrix" where("Semester Code" = FIELD("Semester Code"));
-            // trigger OnValidate()
-            // var
-            //     UnitMat: Record "Unit Matrix";
-            // begin
-            //     if UnitMat.Get("Entry No") then begin
-            //         "Unit Code" := UnitMat."Unit Code";
-            //         "Unit Description" := UnitMat."Unit Description";
-            //         "Course Description" := UnitMat."Course Description";
-            //         "Semester Code" := UnitMat."Semester Code";
-            //         "Unit Core/Elective" := UnitMat."Unit Core/Elective";
-
-            //     end;
-            // end;
-
         }
         field(3; "Unit Code"; Code[30])
         {

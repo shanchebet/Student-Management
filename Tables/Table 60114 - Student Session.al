@@ -62,8 +62,6 @@ table 60114 "Student Session"
                     "Academic Year Code" := Sem." Academic Year Code";
                     Validate("Academic Year Code");
                 end;
-                // if Sem.Get("Semester Code") then
-                //     "Semester Description" := Sem."Semester Description"
             end;
         }
         field(6; "Semester Description"; Text[100])
@@ -130,11 +128,6 @@ table 60114 "Student Session"
         {
             Clustered = true;
         }
-        // {
-        //     key(PK; "Session Code", "Student No.")
-        //     {
-        //         Clustered = true;
-        //     }
     }
     fieldgroups
     {
@@ -159,20 +152,4 @@ table 60114 "Student Session"
             NoSeriesManagement.InitSeries(MSMSStudentSetup."session Nos", xRec."No Series", 0D, "Session Code", "No Series");
         end;
     end;
-
-    // procedure AssistEdit(Stud: Record "Student Session"): Boolean
-    // var
-    //     Studs: Record "Student Session";
-    //     MSMSStudentSetup: Record "Student Management Setup";
-    //     NoSeriesManagement: Codeunit NoSeriesManagement;
-    // begin
-    //     // Studs := Rec;
-    //     MSMSStudentSetup.Get();
-    //     MSMSStudentSetup.TestField("session Nos");
-    //     if NoSeriesManagement.SelectSeries(MSMSStudentSetup."session Nos", xRec."No Series", Rec."No Series") then begin
-    //         NoSeriesManagement.SetSeries(Rec."Session Code");
-    //         exit(true);
-    //     end;
-    // end;
-
 }
