@@ -8,7 +8,7 @@ page 60117 "Student ManagementCues"
     {
         area(content)
         {
-            cuegroup("Student Mnagement")
+            cuegroup("Student Management")
             {
 
                 field("Registered Student List"; Rec."Registered Student List")
@@ -105,6 +105,53 @@ page 60117 "Student ManagementCues"
                     Caption = 'Posted Invoice List';
                     DrillDownPageId = "Posted Invoice List";
                     ToolTip = 'Specifies the value of the Posted Invoice List field.';
+                }
+            }
+            cuegroup("Receipts")
+            {
+
+                field(" Open Receipt List"; Rec." Open Receipt List")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the  Open Receipt List field.';
+                    Caption = 'Open Receipt List';
+                    DrillDownPageId = "Open Receipt List";
+                }
+                field("Pending Approval Receipt"; Rec."Pending Approval Receipt")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Pending Approval Receipt field.';
+                    Caption = 'Pending Approval Receipts';
+                    DrillDownPageId = "Pending Approval Receipt ";
+                }
+                field("Rejected Receipt"; Rec."Rejected Receipt")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Rejected Receipt field.';
+                    Caption = 'Rejecetd Receipts';
+                    DrillDownPageId = "Rejected Receipt";
+                }
+                field(Reversed; Rec.Reversed)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Reversed field.';
+                    Caption = 'Reversed Receipts';
+                    DrillDownPageId = "Reversed Receipt";
+                }
+                field("Approved Receipt"; Rec."Approved Receipt")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Approved Receipt field.';
+                    Caption = 'Approved Receipt';
+                    DrillDownPageId = "Approved Receipts";
+
+                }
+                field("Posted Receipt"; Rec."Posted Receipt")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Posted Receipt field.';
+                    Caption = 'Posted Receipts';
+                    DrillDownPageId = "Posted Receipt";
                 }
             }
         }

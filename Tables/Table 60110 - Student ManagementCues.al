@@ -84,6 +84,38 @@ table 60110 "Student Management Cues"
             FieldClass = FlowField;
             CalcFormula = count("Applicant Registration" where("Approval Status " = CONST(OPen)));
         }
+        field(20; " Open Receipt List"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Receipt Header" where("Status" = CONST(OPen)));
+        }
+        field(21; "Pending Approval Receipt"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Receipt Header" where(Status = const(Pending)));
+        }
+        field(22; "Rejected Receipt"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Receipt Header" where(Status = const(Rejected)));
+        }
+        field(23; "Approved Receipt"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Receipt Header" where(Status = const(Released)));
+
+        }
+        field(24; "Reversed"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Receipt Header" where(Status = const(Reversed)));
+
+        }
+        field(25; "Posted Receipt"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Receipt Header" where(Posted = const(true)));
+        }
     }
 
     keys

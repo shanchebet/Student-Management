@@ -202,15 +202,52 @@ page 60106 "Student Management RoleCentre"
                     }
 
                 }
-                action("Receipts")
+                group("Receipts")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Receipts List';
-                    RunObject = page "Receipt Header List";
+                    action("Receipts ")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Receipts List';
+                        RunObject = page "Receipt Header List";
+                    }
+                    action("Open Receipt List")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Open Receipt List';
+                        RunObject = page "Open Receipt List";
+                    }
+                    action("Pending Approval Receipt")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Pending Approval Receipt';
+                        RunObject = page "Pending Approval Receipt ";
 
+                    }
+                    action("Rejected Receipt")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Rejected Receipt';
+                        RunObject = page "Rejected Receipt";
+                    }
+                    action("Approved Receipt")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Approved Receipt';
+                        RunObject = page "Approved Receipts";
+                    }
+                    action("Reversed Receipt")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Reversed Receipt';
+                        RunObject = page "Reversed Receipt";
+                    }
+                    action("Posted Receipt")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Posted Receipt';
+                        RunObject = page "Posted Receipt";
+                    }
                 }
-
-
             }
             group(Reports)
             {
@@ -239,9 +276,6 @@ page 60106 "Student Management RoleCentre"
                     Caption = 'Student Management Setup';
                     RunObject = page "Student Management Setup";
                 }
-
-
-
             }
 
         }
