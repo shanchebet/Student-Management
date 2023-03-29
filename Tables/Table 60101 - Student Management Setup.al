@@ -111,6 +111,11 @@ table 60101 "Student Management Setup"
             DataClassification = CustomerContent;
             TableRelation = "Gen. Journal Batch" where("Journal Template Name" = field("General Journal Template"));
         }
+        field(15; "Cluster Nos"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
     }
     keys
     {

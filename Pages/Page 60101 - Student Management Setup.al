@@ -56,6 +56,11 @@ page 60101 "Student Management Setup"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Minimum Course Duration field.';
                 }
+                field("Cluster Nos"; Rec."Cluster Nos")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Cluster Nos field.';
+                }
             }
             group("Units & Session Setup")
             {

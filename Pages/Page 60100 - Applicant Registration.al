@@ -86,6 +86,16 @@ page 60100 "Applicant Registration"
                     ToolTip = 'Specifies the value of the Type of applicant field.';
 
                 }
+                field("Grade Attain"; Rec."Grade Attain")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Grade Attained field.';
+                }
+                field(Points; Rec.Points)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Points Attained field.';
+                }
             }
             group("Contacts & Address")
             {

@@ -74,6 +74,12 @@ page 60106 "Student Management RoleCentre"
             }
             group("Administration")
             {
+                action("Cluster Mapping")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Cluster Mapping';
+                    RunObject = page "Cluster Points List";
+                }
 
                 action("School Registration")
                 {

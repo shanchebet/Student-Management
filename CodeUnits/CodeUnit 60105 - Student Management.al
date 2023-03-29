@@ -30,10 +30,28 @@ codeunit 60105 "Student Management"
         end;
 
     end;
-
-    Procedure MyProcedure()
+    //procedure for checking the cluster points in applicant card.
+    procedure CheckClusterPointsRange(var ClusterReg: Record "Applicant Registration")
     var
+        Cluster: Record "Cluster Points";
+        MaximumPoints: Integer;
+        MinimumPoints: Integer;
     begin
-
+        MaximumPoints := 0;
+        MinimumPoints := 0;
+        Cluster.Reset();
+        Cluster.SetRange(Grade, ClusterReg."Grade Attain");
+        if Cluster.FindFirst() then begin
+            MaximumPoints := Cluster."Maximum Points";
+            MinimumPoints := Cluster."Manimum Points";
+            if ClusterReg.Points > MaximumPoints then begin
+                Error('Points Exceed The Maximum Grade selected.', ClusterReg.Points - MaximumPoints);
+            end;
+            if ClusterReg.Points < MinimumPoints then begin
+                Error('The points are below the Minimum Grade selected', MinimumPoints - ClusterReg.Points);
+            end;
+        end;
     end;
+
+
 }

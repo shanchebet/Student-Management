@@ -253,6 +253,22 @@ table 60100 "Applicant Registration"
             Caption = 'level of study Description';
 
         }
+        field(27; "Grade Attain"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Grade Attained';
+            TableRelation = "Cluster Points".Grade;
+        }
+        field(28; "Points"; Integer)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Points Attained';
+            trigger OnValidate()
+
+            begin
+                Stud.CheckClusterPointsRange(Rec);
+            end;
+        }
 
 
     }
@@ -281,6 +297,8 @@ table 60100 "Applicant Registration"
         NoSeriesManagement: Codeunit NoSeriesManagement;
         PostCode: Record "Post Code";
         Course: Record "Courses";
+        Stud: Codeunit "Student Management";
+
 
 
     procedure AssistEdit(StudentApp: Record "Applicant Registration"): Boolean
