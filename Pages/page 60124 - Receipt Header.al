@@ -134,6 +134,7 @@ page 60124 "Receipt Header"
             }
             action("Post Receipt")
             {
+                Enabled = Rec.Status = Rec.Status::Released;
                 Image = Post;
                 PromotedCategory = Process;
                 Promoted = true;

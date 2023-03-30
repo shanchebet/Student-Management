@@ -163,7 +163,7 @@ codeunit 60100 "Workflow Event Handling CUExt"
         ApplicantRec.Reset();
         ApplicantRec.SetRange("Application No.", ApplicantReg."Application No.");
         if ApplicantRec.FindFirst then begin
-            ApplicantRec."Approval Status " := ApplicantRec."Approval Status "::OPen;
+            ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::OPen;
             ApplicantRec.Modify();
         end;
     end;
@@ -222,7 +222,7 @@ codeunit 60100 "Workflow Event Handling CUExt"
         ApplicantRec.RESET();
         ApplicantRec.SetRange("Application No.", ApprovalEntry."Document No.");
         if ApplicantRec.FindFirst then begin
-            ApplicantRec."Approval Status " := ApplicantRec."Approval Status "::Rejected;
+            ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::Rejected;
             ApplicantRec.Modify();
 
         end;

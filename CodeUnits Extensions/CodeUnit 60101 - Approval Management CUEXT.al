@@ -127,7 +127,7 @@ codeunit 60101 "Approval Management CUEXT"
             DATABASE::"Applicant Registration":
                 BEGIN
                     RecRef.SETTABLE(ApplicantReg);
-                    ApplicantReg.VALIDATE("Approval Status ", ApplicantReg."Approval Status "::"Pending");
+                    ApplicantReg.VALIDATE("Approval Status", ApplicantReg."Approval Status"::"Pending");
                     ApplicantReg.MODIFY(TRUE);
                     Variant := ApplicantReg;
                     IsHandled := true;

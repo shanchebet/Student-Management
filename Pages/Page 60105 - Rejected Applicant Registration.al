@@ -3,7 +3,7 @@ page 60105 "Rejected ApplicantRegistration"
     ApplicationArea = All;
     Caption = 'Rejected ApplicantRegistration';
     PageType = List;
-    SourceTableView = where("Approval Status " = const(Rejected));
+    SourceTableView = where("Approval Status" = const(Rejected));
     SourceTable = "Applicant Registration";
     CardPageId = "Applicant Registration";
     UsageCategory = Lists;
@@ -69,7 +69,7 @@ page 60105 "Rejected ApplicantRegistration"
                     ToolTip = 'Specifies the value of the Marital Status field.';
                     Visible = false;
                 }
-                field("Approval Status "; Rec."Approval Status ")
+                field("Approval Status"; Rec."Approval Status")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Approval Status field.';

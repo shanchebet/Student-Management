@@ -67,7 +67,7 @@ codeunit 60103 "Document Release"
         MExits.Reset();
         MExits.SetRange("Application No.", ApplicantRec."Application No.");
         if MExits.FindFirst() then begin
-            ApplicantRec."Approval Status " := ApplicantRec."Approval Status "::Released;
+            ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::Released;
             ApplicantRec.Modify();
             //CreateApplicant(ApplicantRec);
         end;
@@ -75,7 +75,7 @@ codeunit 60103 "Document Release"
 
     procedure ApplicantRegReopen(var ApplicantRec: Record "Applicant Registration")
     begin
-        ApplicantRec."Approval Status " := ApplicantRec."Approval Status "::Open;
+        ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::Open;
         ApplicantRec.Modify();
 
 
@@ -85,21 +85,10 @@ codeunit 60103 "Document Release"
     procedure CreateApplicant(ApplicantRec: Record "Applicant Registration")
     var
         Cust: Record Customer;
-
     begin
-        if ApplicantRec."Approval Status " = ApplicantRec."Approval Status "::Released then begin
+        if ApplicantRec."Approval Status" = ApplicantRec."Approval Status"::Released then begin
             Cust.Init();
-            Cust."No." := ApplicantRec."Application No.";
-            Cust.Name := ApplicantRec."Full Name";
-            Cust."Age" := ApplicantRec.Age;
-            Cust."Gender" := ApplicantRec.Gender;
-            Cust."Marital Status" := ApplicantRec."Marital Status";
-            Cust."Level Of Study" := ApplicantRec."Level Of Study";
-            Cust."Course Of Study" := ApplicantRec."Course Of Study";
-            Cust."Course Description" := ApplicantRec."Course Description";
-            Cust."Department Description" := ApplicantRec."Department Description";
-            Cust."School Description" := ApplicantRec."School Description";
-            Cust."Customer Type" := ApplicantRec."Customer Type";
+            Cust.TransferFields(ApplicantRec);
             Cust.Insert();
         end;
     end;

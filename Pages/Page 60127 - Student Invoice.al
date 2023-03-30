@@ -98,6 +98,7 @@ page 60127 "Student Invoice"
             }
             part("Student Invoice Lines"; "Student Invoice Lines")
             {
+                Editable = Rec.Posted = false;
                 SubPageLink = "Document No." = FIELD("No.");
                 ApplicationArea = all;
                 UpdatePropagation = Both;
@@ -153,6 +154,7 @@ page 60127 "Student Invoice"
                 }
                 action("Invoice Student")
                 {
+                    Enabled = Rec.Status = Rec.Status::Released;
                     Image = Post;
                     PromotedCategory = Process;
                     Promoted = true;

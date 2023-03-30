@@ -3,7 +3,7 @@ page 60104 "Approved ApplicantRegistration"
     ApplicationArea = All;
     Caption = 'Approved ApplicantRegistration';
     PageType = List;
-    SourceTableView = where("Approval Status " = const(Released));
+    SourceTableView = where("Approval Status" = const(Released));
     SourceTable = "Applicant Registration";
     CardPageId = "Applicant Registration";
     UsageCategory = Lists;
@@ -69,7 +69,7 @@ page 60104 "Approved ApplicantRegistration"
                     ToolTip = 'Specifies the value of the Marital Status field.';
                     Visible = false;
                 }
-                field("Approval Status "; Rec."Approval Status ")
+                field("Approval Status"; Rec."Approval Status")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Approval Status field.';

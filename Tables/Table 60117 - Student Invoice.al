@@ -73,7 +73,7 @@ table 60117 "Student Invoice"
             DataClassification = CustomerContent;
             TableRelation = Semester."Semester Code";
         }
-        field(13; "Status"; Enum "Approval Status Type")
+        field(13; "Status"; Enum "Approval Status")
         {
             DataClassification = CustomerContent;
             Caption = 'Status';

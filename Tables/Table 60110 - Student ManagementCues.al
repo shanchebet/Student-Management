@@ -37,17 +37,17 @@ table 60110 "Student Management Cues"
         field(10; "Pending Applicant Registration"; Integer)
         {
             FieldClass = FlowField;
-            CalcFormula = count("Applicant Registration" where("Approval Status " = CONST("Pending")));
+            CalcFormula = count("Applicant Registration" where("Approval Status" = CONST("Pending")));
         }
         field(11; "Approved Applicant Reg."; Integer)
         {
             FieldClass = FlowField;
-            CalcFormula = count("Applicant Registration" where("Approval Status " = CONST(Released)));
+            CalcFormula = count("Applicant Registration" where("Approval Status" = CONST(Released)));
         }
         field(12; "Rejected Applicant Reg."; Integer)
         {
             FieldClass = FlowField;
-            CalcFormula = count("Applicant Registration" where("Approval Status " = CONST(Rejected)));
+            CalcFormula = count("Applicant Registration" where("Approval Status" = CONST(Rejected)));
         }
         field(13; "Posted Invoice List"; Integer)
         {
@@ -82,7 +82,7 @@ table 60110 "Student Management Cues"
         field(19; "Open Applicant Registartion"; Integer)
         {
             FieldClass = FlowField;
-            CalcFormula = count("Applicant Registration" where("Approval Status " = CONST(OPen)));
+            CalcFormula = count("Applicant Registration" where("Approval Status" = CONST(OPen)));
         }
         field(20; " Open Receipt List"; Integer)
         {

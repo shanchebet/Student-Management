@@ -5,6 +5,22 @@ codeunit 60105 "Student Management"
 
     end;
 
+    var
+        Email: Codeunit Email;
+        EmailMessage: Codeunit "Email Message";
+        Recipient: text;
+        Instr: InStream;
+        Oustr: OutStream;
+        TempBlob: Codeunit "Temp Blob";
+        TextBuilder: TextBuilder;
+        Base64Convert: Codeunit "Base64 Convert";
+        RecRef: RecordRef;
+        BodyTxt: Text;
+        Location: Text;
+        FileName: Text;
+        Subject: Text;
+        CompInfor: Record "Company Information";
+
     // Clear Unit Registration Line if Exist Before Inserting new values
     procedure ClearUnitRegistrationLines(UnitReg: Record "Unit Registration")
     var
@@ -53,5 +69,43 @@ codeunit 60105 "Student Management"
         end;
     end;
 
+    procedure EmailAdmissionLetter(ApplicantRec: Record "Applicant Registration")
+
+    begin
+        if ApplicantRec."Approval Status" = ApplicantRec."Approval Status"::Released then begin
+
+            Clear(EmailMessage);
+            Clear(TextBuilder);
+            Clear(Email);
+            Clear(Recipient);
+            Clear(BodyTxt);
+            Clear(Subject);
+            Clear(RecRef);
+
+            CompInfor.Get();
+
+            if RecRef.Get(ApplicantRec.RecordId) then;
+            Recipient := ApplicantRec.Email;
+            Subject := 'Admission Letter';
+
+            TextBuilder.AppendLine('Dear ' + ApplicantRec."Full Name");
+            TextBuilder.AppendLine();//New Line
+            TextBuilder.AppendLine('Find attached Admission Letter');
+            TextBuilder.AppendLine();//New Line
+            TextBuilder.AppendLine('Kind Regards,');
+            TextBuilder.AppendLine();//New Line
+            TextBuilder.AppendLine(CompInfor.Name);
+
+            BodyTxt := TextBuilder.ToText();
+
+            TempBlob.CreateOutStream(Oustr);
+            Report.SaveAs(Report::"Fee Statement", '', ReportFormat::Pdf, Oustr);
+            TempBlob.CreateInStream(Instr);
+
+            EmailMessage.Create(Recipient, Subject, BodyTxt, false);
+            EmailMessage.AddAttachment('Fee Statement.pdf', 'pdf', Base64Convert.ToBase64(Instr));
+            Email.Send(EmailMessage);
+        end;
+    end;
 
 }

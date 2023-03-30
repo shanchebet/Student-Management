@@ -60,5 +60,33 @@ tableextension 60110 CustomerExtension extends Customer
         {
             DataClassification = CustomerContent;
         }
+        field(60120; "First Name"; Text[50])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'First Name';
+            trigger OnValidate()
+            begin
+                Name := "First Name" + ' ' + "Middle Name" + ' ' + SurName;
+            end;
+        }
+        field(60121; "Middle Name"; Text[50])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Middle Name';
+            trigger OnValidate()
+            begin
+                Name := "First Name" + ' ' + "Middle Name" + ' ' + SurName;
+            end;
+
+        }
+        field(60122; "SurName"; Text[50])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'SurName';
+            trigger OnValidate()
+            begin
+                Name := "First Name" + ' ' + "Middle Name" + ' ' + SurName;
+            end;
+        }
     }
 }

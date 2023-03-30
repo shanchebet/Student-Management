@@ -57,6 +57,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
         Inv: Record "Student Invoice";
         Receipt: Record "Receipt Header";
         VarVariant: Variant;
+        StudMgt: Codeunit "Student Management";
     begin
         VarVariant := RecRef;
         CASE RecRef.NUMBER OF
@@ -66,6 +67,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     Handled := true;
                     ReleaseDoc.ApplicantRegRelease(VarVariant);
                     ReleaseDoc.CreateApplicant(VarVariant);
+                    StudMgt.EmailAdmissionLetter(VarVariant)
                 end;
 
             Database::"Student Invoice":

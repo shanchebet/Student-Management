@@ -24,7 +24,7 @@ table 60100 "Applicant Registration"
             END;
 
         }
-        field(2; "First Name"; Text[50])
+        field(60120; "First Name"; Text[50])
         {
             DataClassification = CustomerContent;
             Caption = 'First Name';
@@ -33,7 +33,7 @@ table 60100 "Applicant Registration"
                 "Full Name" := "First Name" + ' ' + "Middle Name" + ' ' + SurName;
             end;
         }
-        field(3; "Middle Name"; Text[50])
+        field(60121; "Middle Name"; Text[50])
         {
             DataClassification = CustomerContent;
             Caption = 'Middle Name';
@@ -43,7 +43,7 @@ table 60100 "Applicant Registration"
             end;
 
         }
-        field(4; "SurName"; Text[50])
+        field(60122; "SurName"; Text[50])
         {
             DataClassification = CustomerContent;
             Caption = 'SurName';
@@ -52,19 +52,19 @@ table 60100 "Applicant Registration"
                 "Full Name" := "First Name" + ' ' + "Middle Name" + ' ' + SurName;
             end;
         }
-        field(5; "Full Name"; Text[100])
+        field(2; "Full Name"; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'Full Name';
             Editable = false;
 
         }
-        field(6; "Gender"; Enum "Gender Type")
+        field(60100; "Gender"; Enum "Gender Type")
         {
             DataClassification = CustomerContent;
             Caption = 'Gender';
         }
-        field(7; "DOB"; Date)
+        field(60101; "DOB"; Date)
         {
             DataClassification = CustomerContent;
             Caption = 'Date of Birth';
@@ -91,7 +91,7 @@ table 60100 "Applicant Registration"
 
             end;
         }
-        field(8; "Age"; Integer)
+        field(60102; "Age"; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'Age';
@@ -114,18 +114,18 @@ table 60100 "Applicant Registration"
                         FieldError("Phone Number", PhoneNumberCannotContainLettersErr);
             end;
         }
-        field(10; "Marital Status"; Enum "Marital Status")
+        field(60103; "Marital Status"; Enum "Marital Status")
         {
             DataClassification = CustomerContent;
             Caption = 'Marital Status';
         }
-        field(11; "Approval Status "; Enum "Approval Status Type")
+        field(60104034; "Approval Status"; Enum "Approval Status")
         {
             DataClassification = CustomerContent;
             Caption = 'Approval Status';
         }
 
-        field(13; "Email"; Text[30])
+        field(102; "Email"; Text[80])
         {
             DataClassification = CustomerContent;
             Caption = 'Email Address';
@@ -137,16 +137,16 @@ table 60100 "Applicant Registration"
             end;
         }
 
-        field(14; "No Series"; Code[30])
+        field(107; "No Series"; Code[20])
         {
             DataClassification = CustomerContent;
         }
-        field(15; Address; Text[100])
+        field(5; Address; Text[100])
         {
             Caption = 'Address';
             DataClassification = ToBeClassified;
         }
-        field(16; City; Text[30])
+        field(7; City; Text[30])
         {
             DataClassification = ToBeClassified;
             Caption = 'city';
@@ -168,12 +168,12 @@ table 60100 "Applicant Registration"
                 PostCode.ValidateCity(City, "Post Code", County, "Country/Region Code", (CurrFieldNo <> 0) and GuiAllowed);
             end;
         }
-        field(17; "Country/Region Code"; Code[10])
+        field(35; "Country/Region Code"; Code[10])
         {
             Caption = 'Country/Region Code';
             TableRelation = "Country/Region";
         }
-        field(18; "Post Code"; Code[20])
+        field(91; "Post Code"; Code[20])
         {
             Caption = 'Post Code';
 
@@ -192,12 +192,12 @@ table 60100 "Applicant Registration"
                 PostCode.ValidatePostCode(City, "Post Code", County, "Country/Region Code", (CurrFieldNo <> 0) and GuiAllowed);
             end;
         }
-        field(19; County; Text[30])
+        field(92; County; Text[30])
         {
 
             Caption = 'County';
         }
-        field(20; "Level Of Study"; Text[100])
+        field(60104; "Level Of Study"; Text[100])
         {
             DataClassification = CustomerContent;
             TableRelation = "Level Of Study";
@@ -211,7 +211,7 @@ table 60100 "Applicant Registration"
             end;
         }
 
-        field(21; "Course Of Study"; Text[30])
+        field(60105; "Course Of Study"; Text[30])
         {
             DataClassification = CustomerContent;
             Caption = '';
@@ -227,39 +227,39 @@ table 60100 "Applicant Registration"
                 end;
             end;
         }
-        field(22; "Customer Type"; Enum "Customer Type")
+        field(60106; "Customer Type"; Enum "Customer Type")
         {
             DataClassification = CustomerContent;
             Caption = 'Type of applicant';
         }
-        field(23; "Course Description"; Text[100])
+        field(60109; "Course Description"; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'Course Description';
         }
-        field(24; "School Description"; Text[100])
+        field(60107; "School Description"; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'School Description';
         }
-        field(25; "Department Description"; Text[100])
+        field(60108; "Department Description"; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'Department Description';
         }
-        field(26; "LOS Description"; Text[100])
+        field(6010402; "LOS Description"; Text[100])
         {
             DataClassification = ToBeClassified;
             Caption = 'level of study Description';
 
         }
-        field(27; "Grade Attain"; Code[20])
+        field(6010401; "Grade Attain"; Code[20])
         {
             DataClassification = ToBeClassified;
             Caption = 'Grade Attained';
             TableRelation = "Cluster Points".Grade;
         }
-        field(28; "Points"; Integer)
+        field(6010400; "Points"; Integer)
         {
             DataClassification = ToBeClassified;
             Caption = 'Points Attained';
@@ -287,7 +287,7 @@ table 60100 "Applicant Registration"
             MSMSStudentSetup.Get();
             MSMSStudentSetup.TestField("Application Nos");
             NoSeriesManagement.InitSeries(MSMSStudentSetup."Application Nos", MSMSStudentSetup."Application Nos", WorkDate(), "Application No.", MSMSStudentSetup."Application Nos");
-            Rec."Approval Status " := Rec."Approval Status "::OPen;
+            Rec."Approval Status" := Rec."Approval Status"::OPen;
             Rec."Customer Type" := Rec."Customer Type"::Student;
         end;
     end;

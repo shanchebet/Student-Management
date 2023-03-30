@@ -122,7 +122,7 @@ table 60115 "Receipt Header"
         field(16; "Received From"; Text[100])
         {
         }
-        field(17; Status; Enum "Approval Status Type")
+        field(17; Status; Enum "Approval Status")
         {
         }
         field(18; " Receipt Amount"; Decimal)

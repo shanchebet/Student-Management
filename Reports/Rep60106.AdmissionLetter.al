@@ -1,47 +1,27 @@
-report 60101 "Applicant Registration Report"
+report 60106 "Admission Letter Report"
 {
     ApplicationArea = All;
-    Caption = 'Applicant Registration Report';
-    UsageCategory = Administration;
-    RDLCLayout = './Reports/Report 60101 - Applicant Registration Report.rdl';
+    Caption = 'Admission Letter';
+    UsageCategory = ReportsAndAnalysis;
+    RDLCLayout = './Reports/Report 60106 - Admission Letter Report.rdl';
     DefaultLayout = RDLC;
-
     dataset
     {
         dataitem(ApplicantRegistration; "Applicant Registration")
         {
-            RequestFilterFields = "Approval Status";
             column(ApplicationNo; "Application No.")
             {
             }
             column(FullName; "Full Name")
             {
             }
-            column(Age; Age)
-            {
-            }
             column(LevelOfStudy; "Level Of Study")
-            {
-            }
-            column(LOSDescription; "LOS Description")
-            {
-            }
-            column(CourseOfStudy; "Course Of Study")
             {
             }
             column(CourseDescription; "Course Description")
             {
             }
-            column(Gender; Gender)
-            {
-            }
-            column(PhoneNumber; "Phone Number")
-            {
-            }
-            column(CustomerType; "Customer Type")
-            {
-            }
-            column(ApprovalStatus; "Approval Status")
+            column(Address; Address)
             {
             }
             column(CompLogo; CompInfo.Picture)
@@ -73,24 +53,6 @@ report 60101 "Applicant Registration Report"
 
             }
 
-        }
-    }
-    requestpage
-    {
-        layout
-        {
-            area(content)
-            {
-                group(GroupName)
-                {
-                }
-            }
-        }
-        actions
-        {
-            area(processing)
-            {
-            }
         }
     }
     trigger OnPreReport()
