@@ -151,6 +151,12 @@ page 60106 "Student Management RoleCentre"
                     ApplicationArea = basic, Suite;
                     RunObject = page "Unit Registration List";
                 }
+                action("Exam Entries")
+                {
+                    ApplicationArea = all;
+                    RunObject = page "Exam Entries";
+                }
+
             }
             group("Finance Transactions")
             {

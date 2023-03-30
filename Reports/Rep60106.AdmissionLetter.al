@@ -44,6 +44,10 @@ report 60106 "Admission Letter Report"
             {
 
             }
+            column(CompHomePage; CompInfo."Home Page")
+            {
+
+            }
             column(PreparedBy; UserId)
             {
 

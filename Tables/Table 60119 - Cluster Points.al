@@ -32,6 +32,18 @@ table 60119 "Cluster Points"
         {
             DataClassification = ToBeClassified;
         }
+        field(5; "StartDate"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(6; "End Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(7; "Remarks"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

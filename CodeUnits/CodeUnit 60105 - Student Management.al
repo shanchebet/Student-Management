@@ -99,11 +99,11 @@ codeunit 60105 "Student Management"
             BodyTxt := TextBuilder.ToText();
 
             TempBlob.CreateOutStream(Oustr);
-            Report.SaveAs(Report::"Fee Statement", '', ReportFormat::Pdf, Oustr);
+            Report.SaveAs(Report::"Admission Letter Report", '', ReportFormat::Pdf, Oustr);
             TempBlob.CreateInStream(Instr);
 
             EmailMessage.Create(Recipient, Subject, BodyTxt, false);
-            EmailMessage.AddAttachment('Fee Statement.pdf', 'pdf', Base64Convert.ToBase64(Instr));
+            EmailMessage.AddAttachment('Admission Letter.pdf', 'pdf', Base64Convert.ToBase64(Instr));
             Email.Send(EmailMessage);
         end;
     end;

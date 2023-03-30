@@ -258,6 +258,7 @@ table 60100 "Applicant Registration"
             DataClassification = ToBeClassified;
             Caption = 'Grade Attained';
             TableRelation = "Cluster Points".Grade;
+
         }
         field(6010400; "Points"; Integer)
         {
