@@ -31,6 +31,10 @@ page 60127 "Student Invoice"
                         if Page.RunModal(Page::"Student Session List ", stud) = Action::LookupOK then
                             Rec."Bill-to Student No." := stud."Student No.";
                         Rec."Student Name" := stud."Student Name";
+                        Rec."Course Of Study" := stud."Course Of Study";
+                        Rec."Level Of Study" := stud."Level Of Study";
+                        Rec."School Description" := stud."School Description";
+                        rec."Course Description" := stud."Course Description";
                         Rec."Academic Year Code" := stud."Academic Year Code";
                         Rec.Semester := stud."Semester Code";
                         rec.Semester := stud."Semester Description";

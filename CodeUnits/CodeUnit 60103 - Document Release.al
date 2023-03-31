@@ -63,6 +63,7 @@ codeunit 60103 "Document Release"
     procedure ApplicantRegRelease(var ApplicantRec: Record "Applicant Registration")
     var
         MExits: Record "Applicant Registration";
+        StudMgt: Codeunit "Student Management";
     begin
         MExits.Reset();
         MExits.SetRange("Application No.", ApplicantRec."Application No.");
@@ -70,6 +71,8 @@ codeunit 60103 "Document Release"
             ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::Released;
             ApplicantRec.Modify();
             //CreateApplicant(ApplicantRec);
+            CreateApplicant(ApplicantRec);
+            StudMgt.EmailAdmissionLetter(ApplicantRec);
         end;
     end;
 

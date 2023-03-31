@@ -5,7 +5,7 @@ page 60140 "Approved Receipts"
     PageType = List;
     SourceTable = "Receipt Header";
     UsageCategory = Lists;
-    SourceTableView = where("Status" = const(Released));
+    SourceTableView = where("Status" = const(Released), Posted = const(false));
     CardPageId = "Receipt Header";
 
     layout

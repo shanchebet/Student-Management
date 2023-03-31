@@ -30,7 +30,7 @@ page 60144 "Cluster Points"
                 }
 
 
-                field("Manimum Points"; Rec."Manimum Points")
+                field("Minimum Points"; Rec."Minimum Points")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Manimum Points field.';

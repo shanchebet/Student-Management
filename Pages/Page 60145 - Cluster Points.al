@@ -28,7 +28,7 @@ page 60145 "Cluster Points List"
                     ToolTip = 'Specifies the value of the End Date field.';
                 }
 
-                field("Manimum Points"; Rec."Manimum Points")
+                field("Minimum Points"; Rec."Minimum Points")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Manimum Points field.';

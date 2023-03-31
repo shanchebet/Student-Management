@@ -19,6 +19,7 @@ codeunit 60105 "Student Management"
         Location: Text;
         FileName: Text;
         Subject: Text;
+        File: File;
         CompInfor: Record "Company Information";
 
     // Clear Unit Registration Line if Exist Before Inserting new values
@@ -59,7 +60,7 @@ codeunit 60105 "Student Management"
         Cluster.SetRange(Grade, ClusterReg."Grade Attain");
         if Cluster.FindFirst() then begin
             MaximumPoints := Cluster."Maximum Points";
-            MinimumPoints := Cluster."Manimum Points";
+            MinimumPoints := Cluster."Minimum Points";
             if ClusterReg.Points > MaximumPoints then begin
                 Error('Points Exceed The Maximum Grade selected.', ClusterReg.Points - MaximumPoints);
             end;
@@ -70,7 +71,10 @@ codeunit 60105 "Student Management"
     end;
 
     procedure EmailAdmissionLetter(ApplicantRec: Record "Applicant Registration")
-
+    var
+        AdmissionLetter: Report "Admission Letter Report";
+        FilePath: Text;
+        AppRec: Record "Applicant Registration";
     begin
         if ApplicantRec."Approval Status" = ApplicantRec."Approval Status"::Released then begin
 
@@ -98,13 +102,23 @@ codeunit 60105 "Student Management"
 
             BodyTxt := TextBuilder.ToText();
 
-            TempBlob.CreateOutStream(Oustr);
-            Report.SaveAs(Report::"Admission Letter Report", '', ReportFormat::Pdf, Oustr);
-            TempBlob.CreateInStream(Instr);
+            Location := TemporaryPath + 'Admission Letter.pdf';
+
+            AppRec.Reset();
+            AppRec.SetRange("Application No.", ApplicantRec."Application No.");
+            if AppRec.FindFirst() then;
+
+            Clear(AdmissionLetter);
+            AdmissionLetter.SetTableView(AppRec);
+            AdmissionLetter.SaveAsPdf(Location);
+
+            File.Open(Location);
+            File.CreateInStream(Instr);
 
             EmailMessage.Create(Recipient, Subject, BodyTxt, false);
-            EmailMessage.AddAttachment('Admission Letter.pdf', 'pdf', Base64Convert.ToBase64(Instr));
+            EmailMessage.AddAttachment(Location, 'pdf', Instr);
             Email.Send(EmailMessage);
+            File.Close();
         end;
     end;
 

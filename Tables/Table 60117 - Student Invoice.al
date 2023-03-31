@@ -110,8 +110,8 @@ table 60117 "Student Invoice"
             MSMSStudentSetup.Get();
             MSMSStudentSetup.TestField("StudIN Nos");
             NoSeriesManagement.InitSeries(MSMSStudentSetup."StudIN Nos", MSMSStudentSetup."StudIN Nos", WorkDate(), "No.", MSMSStudentSetup."StudIN Nos");
-
         end;
+        Status := Status::Open;
     end;
 
 }

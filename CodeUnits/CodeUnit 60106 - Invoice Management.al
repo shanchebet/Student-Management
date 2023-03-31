@@ -30,18 +30,21 @@ codeunit 60106 "Invoice Management"
                 Error(Label1, "No.");
             StudMgmt.Get();
 
+            // step 1 : Test field all the important fields
             StudMgmt.TestField("General Journal Batch");
             StudMgmt.TestField("General Journal Template");
             INVRec.Testfield("Invoiced Amount");
             INVRec.TestField("Posting Date");
             INVRec.TestField("Bill-to Student No.");
 
+            // Step 2:  Create a batch using the document 
             JnlBatch.Init;
             JnlBatch."Journal Template Name" := StudMgmt."General Journal Template";
             JnlBatch.Name := "No.";
             if not JnlBatch.Get(StudMgmt."General Journal Template", "No.") then
                 JnlBatch.Insert;
 
+            // Step 3: Reset the lines and code that will loop through the lines to insert the journal lines for  invoicing.
             GenJnlLine.Reset;
             GenJnlLine.SetRange(GenJnlLine."Journal Template Name", StudMgmt."General Journal Template");
             GenJnlLine.SetRange(GenJnlLine."Journal Batch Name", "No.");
@@ -69,7 +72,7 @@ codeunit 60106 "Invoice Management"
                         //DR Student/Customer Account
                         GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::Customer;
                         GenJnlLine."Bal. Account No." := "Bill-to Student No.";
-                        GenJnlLine."Document Type" := GenJnlLine."Document Type"::Invoice;
+                        //GenJnlLine."Document Type" := GenJnlLine."Document Type"::Invoice;
                         GenJnlLine.Amount := -Round(InvoiceLines.Amount);
                         GenJnlLine.Validate(Amount);
                         if GenJnlLine.Amount <> 0 then
@@ -77,11 +80,12 @@ codeunit 60106 "Invoice Management"
                     until InvoiceLines.Next() = 0;
                 end;
             end;
+            // step 4: This passes the lines for posting 
             GenJnlLine.Reset;
             GenJnlLine.SetRange("Journal Template Name", StudMgmt."General Journal Template");
             GenJnlLine.SetRange("Journal Batch Name", INVRec."No.");
             CODEUNIT.Run(CODEUNIT::"Gen. Jnl.-Post Batch", GenJnlLine);
-
+            // step 5: modfies when posted and set the posted boolean to be posted.
             GLRegister.Reset;
             GLRegister.SetRange("Journal Batch Name", INVRec."No.");
             if GLRegister.Find('-') then begin

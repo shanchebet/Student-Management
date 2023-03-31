@@ -173,6 +173,7 @@ table 60115 "Receipt Header"
             NoSeriesManagement.InitSeries(MSMSStudentSetup."Receipt Nos", MSMSStudentSetup."Receipt Nos", WorkDate(), "No.", MSMSStudentSetup."Receipt Nos");
         end;
         "Cashier" := UserId;
+        Status := Status::Open;
     end;
 
 }

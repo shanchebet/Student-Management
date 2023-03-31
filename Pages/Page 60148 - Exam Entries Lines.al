@@ -15,6 +15,7 @@ page 60148 "Exam Entries Lines"
                 field("Document No."; Rec."Document No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                     ToolTip = 'Specifies the value of the Document Number field.';
                 }
                 field("Unit Code"; Rec."Unit Code")

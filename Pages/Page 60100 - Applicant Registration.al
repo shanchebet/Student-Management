@@ -198,6 +198,7 @@ page 60100 "Applicant Registration"
                     end;
                 }
 
+
                 action("Send Approval Request")
                 {
                     Image = SendApprovalRequest;

@@ -175,6 +175,7 @@ page 60106 "Student Management RoleCentre"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Invoices Lists';
                         RunObject = page "Student Invoice Lists";
+                        Visible = false;
                     }
                     action("Open Invoices")
                     {
@@ -220,6 +221,7 @@ page 60106 "Student Management RoleCentre"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Receipts List';
+                        Visible = false;
                         RunObject = page "Receipt Header List";
                     }
                     action("Open Receipt List")

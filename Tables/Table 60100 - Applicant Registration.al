@@ -288,7 +288,7 @@ table 60100 "Applicant Registration"
             MSMSStudentSetup.Get();
             MSMSStudentSetup.TestField("Application Nos");
             NoSeriesManagement.InitSeries(MSMSStudentSetup."Application Nos", MSMSStudentSetup."Application Nos", WorkDate(), "Application No.", MSMSStudentSetup."Application Nos");
-            Rec."Approval Status" := Rec."Approval Status"::OPen;
+            Rec."Approval Status" := Rec."Approval Status"::Open;
             Rec."Customer Type" := Rec."Customer Type"::Student;
         end;
     end;

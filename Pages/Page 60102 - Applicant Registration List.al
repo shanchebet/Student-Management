@@ -5,10 +5,7 @@ page 60102 "Applicant Registration List"
     PageType = List;
     SourceTable = "Applicant Registration";
     UsageCategory = Lists;
-
     CardPageId = "Applicant Registration";
-    Editable = false;
-
     layout
     {
         area(Content)

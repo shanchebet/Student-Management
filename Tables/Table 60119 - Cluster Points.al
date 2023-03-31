@@ -28,7 +28,7 @@ table 60119 "Cluster Points"
         {
             DataClassification = ToBeClassified;
         }
-        field(4; "Manimum Points"; Integer)
+        field(4; "Minimum Points"; Integer)
         {
             DataClassification = ToBeClassified;
         }

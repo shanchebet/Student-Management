@@ -12,6 +12,7 @@ page 60124 "Receipt Header"
         {
             group(GroupName)
             {
+                //Enabled = rec.Status = Rec.Status::Open;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -107,6 +108,7 @@ page 60124 "Receipt Header"
                 SubPageLink = "Document No" = FIELD("No.");
                 ApplicationArea = all;
                 UpdatePropagation = Both;
+                //Enabled = rec.Status = Rec.Status::Open;
             }
         }
     }

@@ -66,8 +66,6 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     ApplicantReg.SetView(RecRef.GetView());
                     Handled := true;
                     ReleaseDoc.ApplicantRegRelease(VarVariant);
-                    ReleaseDoc.CreateApplicant(VarVariant);
-                    StudMgt.EmailAdmissionLetter(VarVariant)
                 end;
 
             Database::"Student Invoice":
