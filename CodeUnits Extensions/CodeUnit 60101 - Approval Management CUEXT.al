@@ -89,12 +89,14 @@ codeunit 60101 "Approval Management CUEXT"
         NumberSeries: Codeunit NoSeriesManagement;
         Inv: Record "Student Invoice";
         Receipt: Record "Receipt Header";
+        ApprovalAmnt: Decimal;
     begin
         CASE RecRef.NUMBER OF
 
             DATABASE::"Applicant Registration":
                 BEGIN
                     RecRef.SETTABLE(ApplicantReg);
+
                     ApprovalEntryArgument."Document No." := ApplicantReg."Application No.";
 
                 END;
@@ -102,12 +104,20 @@ codeunit 60101 "Approval Management CUEXT"
             Database::"Student Invoice":
                 begin
                     RecRef.SetTable(Inv);
+                    Inv.CalcFields("Invoiced Amount");
+                    ApprovalAmnt := Inv."Invoiced Amount";
+                    ApprovalEntryArgument.Amount := ApprovalAmnt;
+                    ApprovalEntryArgument."Amount (LCY)" := ApprovalAmnt;
                     ApprovalEntryArgument."Document No." := Inv."No."
                 end;
 
             Database::"Receipt Header":
                 begin
                     RecRef.SetTable(Receipt);
+                    Receipt.CalcFields(" Receipt Amount");
+                    ApprovalAmnt := Receipt." Receipt Amount";
+                    ApprovalEntryArgument.Amount := ApprovalAmnt;
+                    ApprovalEntryArgument."Amount (LCY)" := ApprovalAmnt;
                     ApprovalEntryArgument."Document No." := Receipt."No.";
                 end;
         end;

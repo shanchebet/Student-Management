@@ -5,7 +5,7 @@ page 60142 "Rejected Receipt"
     PageType = List;
     SourceTable = "Receipt Header";
     UsageCategory = Lists;
-    SourceTableView = where("Status" = const(Rejected));
+    SourceTableView = where("Status" = const(Rejected), Posted = const(false));
     CardPageId = "Receipt Header";
 
     layout

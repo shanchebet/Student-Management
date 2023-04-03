@@ -5,12 +5,17 @@ codeunit 60104 "Page Management EXT"
 
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Page Management", 'OnAfterGetPageID', '', true, true)]
+    [EventSubscriber(ObjectType::Codeunit, 700, 'OnAfterGetPageID', '', true, true)]
     local procedure OnAfterGetPageID(RecordRef: RecordRef; var PageId: Integer)
     begin
-        if PageId = 0 then
-            PageId := GetConditionalCardPageId(RecordRef);
-
+        case RecordRef.Number of
+            database::"Applicant Registration":
+                PageId := GetConditionalCardPageId(RecordRef);
+            Database::"Student Invoice":
+                PageId := GetConditionalCardPageId(RecordRef);
+            Database::"Receipt Header":
+                PageId := GetConditionalCardPageId(RecordRef);
+        end;
     end;
 
     local procedure GetConditionalCardPageId(RecordRef: RecordRef): Integer
@@ -18,6 +23,10 @@ codeunit 60104 "Page Management EXT"
         case RecordRef.Number of
             database::"Applicant Registration":
                 exit(page::"Applicant Registration");
+            Database::"Student Invoice":
+                exit(Page::"Student Invoice");
+            Database::"Receipt Header":
+                exit(Page::"Receipt Header");
         end;
     end;
 

@@ -5,7 +5,7 @@ page 60143 "Posted Receipt"
     PageType = List;
     SourceTable = "Receipt Header";
     UsageCategory = Lists;
-    SourceTableView = where("posted" = const(true));
+    SourceTableView = where(Posted = const(true));
     CardPageId = "Receipt Header";
     DeleteAllowed = false;
     InsertAllowed = false;

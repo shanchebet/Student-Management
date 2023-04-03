@@ -65,6 +65,7 @@ codeunit 60106 "Invoice Management"
                         //  Cr Fee Structure Accounts
                         GenJnlLine."Account Type" := StudentBillSetup."Bal. Account Type";
                         GenJnlLine."Account No." := StudentBillSetup."Balancing Account No.";
+                        GenJnlLine."Posting Group" := StudentBillSetup."Posting Group";
                         GenJnlLine."Posting Date" := "Posting Date";
                         GenJnlLine."Document No." := InvoiceLines.No;
                         GenJnlLine.Description := StrSubstNo('%1 for Invoice Reference No. %2', InvoiceLines."Transaction Type", InvoiceLines.No);

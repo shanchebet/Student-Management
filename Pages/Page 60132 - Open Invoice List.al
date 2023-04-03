@@ -5,7 +5,7 @@ page 60132 "Open Invoice List"
     PageType = List;
     SourceTable = "Student Invoice";
     CardPageId = "Student Invoice";
-    SourceTableView = where("Status" = const(OPen));
+    SourceTableView = where("Status" = const(Open), Posted = const(false));
     UsageCategory = Lists;
 
     layout

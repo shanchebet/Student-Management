@@ -204,7 +204,9 @@ page 60100 "Applicant Registration"
                     Image = SendApprovalRequest;
                     Promoted = true;
                     PromotedCategory = Category6;
-                    Enabled = not OpenApprovalEntriesExist;
+                    // Enabled = not OpenApprovalEntriesExist;
+                    //Enabled = not OpenApprovalEntriesExist AND CanRequestApprovalForFlow;
+                    Visible = not OpenApprovalEntriesExist AND CanRequestApprovalForFlow;
                     PromotedOnly = true;
                     ApplicationArea = All;
                     trigger OnAction()
@@ -220,6 +222,8 @@ page 60100 "Applicant Registration"
                 action("Cancel Approval Request")
                 {
                     Enabled = CanCancelApprovalForRecord OR CanCancelApprovalForFlow;
+                    //Enabled = OpenApprovalEntriesExist;
+
                     Image = CancelApprovalRequest;
                     PromotedCategory = Category6;
                     Promoted = true;
@@ -247,7 +251,7 @@ page 60100 "Applicant Registration"
             }
         }
     }
-    trigger OnAfterGetRecord()
+    trigger OnAfterGetCurrRecord()
 
     begin
 
@@ -268,4 +272,5 @@ page 60100 "Applicant Registration"
         CanCancelApprovalForFlow: Boolean;
         CanRequestApprovalForFlow: Boolean;
         ReleaseDoc: Codeunit "Document Release";
+        EnabledApprovalWorkflowsExist: Boolean;
 }

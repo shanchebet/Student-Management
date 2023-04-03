@@ -28,7 +28,7 @@ page 60131 "Registered Student Card"
                     Importance = Promoted;
                     ShowMandatory = true;
                     ToolTip = 'Specifies the customer''s name. This name will appear on all sales documents for the customer.';
-
+                    Editable = false;
                     trigger OnValidate()
                     begin
                         CurrPage.Update(true);
@@ -68,53 +68,63 @@ page 60131 "Registered Student Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Customer Type field.';
+                    Editable = false;
                 }
 
                 field(DOB; Rec.DOB)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Date of Birth field.';
+                    Editable = false;
                 }
 
                 field(Age; Rec.Age)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Age field.';
+                    Editable = false;
                 }
                 field(Gender; Rec.Gender)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Gender field.';
+                    Editable = false;
                 }
                 field("Marital Status"; Rec."Marital Status")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Marital Status field.';
+                    Editable = false;
                 }
                 field("Level Of Study"; Rec."Level Of Study")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Level of Study field.';
+                    Editable = false;
                 }
                 field("Course Of Study"; Rec."Course Of Study")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Course of Study field.';
+                    Editable = false;
                 }
                 field("Course Description"; Rec."Course Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Course Description field.';
+                    Editable = false;
                 }
                 field("School Description"; Rec."School Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the School Description field.';
+                    Editable = false;
                 }
                 field("Department Description"; Rec."Department Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Department Description field.';
+                    Editable = false;
                 }
             }
             group("Address & Contact")
@@ -127,6 +137,7 @@ page 60131 "Registered Student Card"
                     {
                         ApplicationArea = Basic, Suite;
                         ToolTip = 'Specifies the customer''s address. This address will appear on all sales documents for the customer.';
+                        Editable = false;
                     }
                     field("Address 2"; Rec."Address 2")
                     {
@@ -137,12 +148,14 @@ page 60131 "Registered Student Card"
                     {
                         ApplicationArea = Basic, Suite;
                         ToolTip = 'Specifies the country/region of the address.';
+                        Editable = false;
 
                     }
                     field(City; Rec.City)
                     {
                         ApplicationArea = Basic, Suite;
                         ToolTip = 'Specifies the customer''s city.';
+                        Editable = false;
                     }
                     group(Control10)
                     {
@@ -152,6 +165,7 @@ page 60131 "Registered Student Card"
                         {
                             ApplicationArea = Basic, Suite;
                             ToolTip = 'Specifies the state, province or county as a part of the address.';
+                            Editable = false;
                         }
                     }
                     field("Post Code"; Rec."Post Code")
@@ -159,12 +173,14 @@ page 60131 "Registered Student Card"
                         ApplicationArea = Basic, Suite;
                         Importance = Promoted;
                         ToolTip = 'Specifies the postal code.';
+                        Editable = false;
                     }
                 }
                 field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the customer''s telephone number.';
+                    Editable = false;
                 }
                 field(MobilePhoneNo; Rec."Mobile Phone No.")
                 {
@@ -179,6 +195,7 @@ page 60131 "Registered Student Card"
                     ExtendedDatatype = EMail;
                     Importance = Promoted;
                     ToolTip = 'Specifies the customer''s email address.';
+                    Editable = false;
                 }
                 field("Language Code"; Rec."Language Code")
                 {

@@ -5,7 +5,7 @@ page 60133 "Pending Approval Invoice List"
     PageType = List;
     SourceTable = "Student Invoice";
     CardPageId = "Student Invoice";
-    SourceTableView = where("Status" = const(Pending));
+    SourceTableView = where("Status" = const(Pending), Posted = const(false));
     UsageCategory = Lists;
 
     layout

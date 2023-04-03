@@ -5,7 +5,7 @@ page 60138 "Open Receipt List"
     PageType = List;
     SourceTable = "Receipt Header";
     UsageCategory = Lists;
-    SourceTableView = where("Status" = const(OPen));
+    SourceTableView = where("Status" = const(Open), Posted = const(false));
     CardPageId = "Receipt Header";
 
     layout

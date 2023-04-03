@@ -6,7 +6,7 @@ page 60136 "Rejected Invoice List"
     SourceTable = "Student Invoice";
     UsageCategory = Lists;
     CardPageId = "Student Invoice";
-    SourceTableView = where("Status" = filter(Rejected));
+    SourceTableView = where("Status" = filter(Rejected), Posted = const(false));
 
 
     layout

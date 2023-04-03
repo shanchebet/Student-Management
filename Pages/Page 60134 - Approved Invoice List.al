@@ -5,7 +5,7 @@ page 60134 "Approved Invoice List"
     PageType = List;
     CardPageId = "Student Invoice";
     SourceTable = "Student Invoice";
-    SourceTableView = where("Status" = const(Released));
+    SourceTableView = where("Status" = const(Released), Posted = const(false));
     UsageCategory = Lists;
 
     layout

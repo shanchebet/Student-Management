@@ -5,7 +5,7 @@ page 60139 "Pending Approval Receipt "
     PageType = List;
     SourceTable = "Receipt Header";
     UsageCategory = Lists;
-    SourceTableView = where("Status" = const(Pending));
+    SourceTableView = where("Status" = const(Pending), Posted = const(false));
     CardPageId = "Receipt Header";
 
     layout
