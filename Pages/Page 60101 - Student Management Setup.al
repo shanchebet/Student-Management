@@ -20,6 +20,11 @@ page 60101 "Student Management Setup"
                     Caption = 'Numbering For Applicant';
                     ToolTip = 'Specifies the number series for a Applicant';
                 }
+                field("Exam Nos"; Rec."Exam Nos")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Exam Nos field.';
+                }
             }
             group("AgeSetup for Applicant")
             {
@@ -60,6 +65,16 @@ page 60101 "Student Management Setup"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Cluster Nos field.';
+                }
+                field("Max Cat Mark"; Rec."Max Cat Mark")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Max Cat Mark field.';
+                }
+                field("Max Exam Mark"; Rec."Max Exam Mark")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Max Exam Mark field.';
                 }
             }
             group("Units & Session Setup")

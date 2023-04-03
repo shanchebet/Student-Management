@@ -16,7 +16,9 @@ page 60149 "Exam Entries Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.';
+                    Visible = false;
                 }
+
                 field("Student No."; Rec."Student No.")
                 {
                     ApplicationArea = All;
@@ -29,6 +31,8 @@ page 60149 "Exam Entries Card"
                     begin
                         if Page.RunModal(Page::"Unit Registration List", UnitReg) = Action::LookupOK then begin
                             Rec."Student No." := UnitReg."Student No.";
+                            Rec."Unit Reg No." := UnitReg."No.";
+                            Rec.Validate("Unit Reg No.");
                             Rec."Student Name" := UnitReg."Student Name";
                             rec."Level Of Study" := UnitReg."Level Of Study";
                             Rec."Course Of Study" := UnitReg."Course Of Study";

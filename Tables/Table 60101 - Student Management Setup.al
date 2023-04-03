@@ -116,6 +116,19 @@ table 60101 "Student Management Setup"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+        field(16; "Exam Nos"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+        }
+        field(17; "Max Cat Mark"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(18; "Max Exam Mark"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

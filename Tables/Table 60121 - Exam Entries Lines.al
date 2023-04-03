@@ -14,7 +14,15 @@ table 60121 "Exam Entries Lines"
         {
             DataClassification = ToBeClassified;
             Caption = 'Unit Code';
-            NotBlank = true;
+            //NotBlank = true;
+            TableRelation = Units;
+            trigger OnValidate()
+            var
+                UnitRec: Record Units;
+            begin
+                if UnitRec.Get("Unit Code") then
+                    "Unit Description" := UnitRec."Unit Description";
+            end;
         }
         field(3; "Unit Description"; Text[100])
         {
@@ -27,6 +35,9 @@ table 60121 "Exam Entries Lines"
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
+                Stdmgt.Get();
+                if Rec."Exam Marks" > Stdmgt."Max Cat Mark" then
+                    Error('Maximum Cat Marks Should be less or Equal to %1', Stdmgt."Max Cat Mark");
                 Validate("Final Mark");
             end;
 
@@ -36,6 +47,9 @@ table 60121 "Exam Entries Lines"
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
+                Stdmgt.Get();
+                if Rec."Exam Marks" > Stdmgt."Max Exam Mark" then
+                    Error('Maximum Exam Marks Should be less or Equal to %1', Stdmgt."Max Exam Mark");
                 Validate("Final Mark");
             end;
         }
@@ -44,6 +58,7 @@ table 60121 "Exam Entries Lines"
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
+                "Final Mark" := "Cat Marks" + "Exam Marks";
                 GradingSystem.Reset();
                 GradingSystem.SetFilter("Minimum Points", '<=%1', "Final Mark");
                 GradingSystem.SetFilter("Maximum Points", '>=%1', "Final Mark");
@@ -77,5 +92,6 @@ table 60121 "Exam Entries Lines"
 
     var
         GradingSystem: Record "Cluster Points";
+        Stdmgt: Record "Student Management Setup";
 
 }

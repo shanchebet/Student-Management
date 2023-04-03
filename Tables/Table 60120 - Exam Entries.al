@@ -8,6 +8,13 @@ table 60120 "Exam Entries"
         field(1; "No."; Code[20])
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+
+            begin
+                if "No." <> "No." then
+                    NoSeriesManagement.TestManual(MSMSStudentSetup."Exam Nos");
+            end;
         }
         field(2; "Student No."; Code[20])
         {
@@ -41,6 +48,26 @@ table 60120 "Exam Entries"
         {
             DataClassification = CustomerContent;
         }
+        field(13; "Unit Reg No."; Code[30])
+        {
+            DataClassification = CustomerContent;
+            trigger OnValidate()
+            begin
+                UnitReglines.Reset();
+                UnitReglines.SetRange("Document No.", Rec."Unit Reg No.");
+                UnitReglines.SetFilter("Unit Status", '=%1', UnitReglines."Unit Status"::Registered);
+                if UnitReglines.FindSet() then begin
+                    repeat
+                        ExEntrieLine.Init();
+                        ExEntrieLine."Line No." := UnitReglines."Line No";
+                        ExEntrieLine."Document No." := Rec."No.";
+                        ExEntrieLine."Unit Code" := UnitReglines."Unit Code";
+                        ExEntrieLine.Validate("Unit Code");
+                        ExEntrieLine.Insert();
+                    until UnitReglines.Next() = 0;
+                end;
+            end;
+        }
     }
     keys
     {
@@ -49,4 +76,18 @@ table 60120 "Exam Entries"
             Clustered = true;
         }
     }
+    var
+        MSMSStudentSetup: Record "Student Management Setup";
+        NoSeriesManagement: Codeunit NoSeriesManagement;
+        UnitReglines: Record "Unit Registration Line";
+        ExEntrieLine: Record "Exam Entries Lines";
+
+    trigger OnInsert()
+    begin
+        if "No." = '' then begin
+            MSMSStudentSetup.Get();
+            MSMSStudentSetup.TestField("Exam Nos");
+            // NoSeriesManagement.InitSeries(MSMSStudentSetup."Exam Nos", xRec.no);
+        end;
+    end;
 }

@@ -21,11 +21,13 @@ page 60148 "Exam Entries Lines"
                 field("Unit Code"; Rec."Unit Code")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                     ToolTip = 'Specifies the value of the Unit Code field.';
                 }
                 field("Unit Description"; Rec."Unit Description")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                     ToolTip = 'Specifies the value of the Unit Description field.';
                 }
                 field("Cat Marks"; Rec."Cat Marks")
@@ -41,16 +43,19 @@ page 60148 "Exam Entries Lines"
                 field("Final Mark"; Rec."Final Mark")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                     ToolTip = 'Specifies the value of the Final Mark field.';
                 }
                 field(Grade; Rec.Grade)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                     ToolTip = 'Specifies the value of the Grade field.';
                 }
                 field(Remarks; Rec.Remarks)
                 {
                     ApplicationArea = All;
+                    Editable = false;
                     ToolTip = 'Specifies the value of the Remarks field.';
                 }
             }

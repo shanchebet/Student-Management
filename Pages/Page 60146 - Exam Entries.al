@@ -22,8 +22,6 @@ page 60146 "Exam Entries"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Student No field.';
-
-
                 }
                 field("Student Name"; Rec."Student Name")
                 {
@@ -51,7 +49,6 @@ page 60146 "Exam Entries"
                     ToolTip = 'Specifies the value of the Semester field.';
                 }
             }
-
         }
     }
 }
