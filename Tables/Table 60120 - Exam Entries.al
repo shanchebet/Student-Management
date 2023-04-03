@@ -31,7 +31,6 @@ table 60120 "Exam Entries"
             DataClassification = CustomerContent;
             Caption = 'Course of Study';
 
-
         }
         field(11; "Academic Year Code"; Code[30])
         {

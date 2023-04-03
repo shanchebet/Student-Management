@@ -12,7 +12,7 @@ page 60124 "Receipt Header"
         {
             group(GroupName)
             {
-                //Enabled = rec.Status = Rec.Status::Open;
+                Editable = IsEditable and IsOpen;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -105,10 +105,12 @@ page 60124 "Receipt Header"
             }
             part("Receipt Header Lines"; "Receipt Header Lines")
             {
+                //Editable = Rec.Posted = false;
                 SubPageLink = "Document No" = FIELD("No.");
                 ApplicationArea = all;
+                Editable = IsEditable and IsOpen;
                 UpdatePropagation = Both;
-                //Enabled = rec.Status = Rec.Status::Open;
+
             }
         }
     }
@@ -211,6 +213,23 @@ page 60124 "Receipt Header"
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
     end;
 
+    trigger OnOpenPage()
+    begin
+        SetPageControl();
+        CurrPage.Update();
+    end;
+
+    procedure SetPageControl()
+    begin
+        IsOpen := true;
+        IsEditable := true;
+        if Rec.Posted then
+            IsEditable := false;
+        if Rec.Status <> Rec.Status::Open then
+            IsOpen := false;
+
+    end;
+
     var
 
         ReceiptHeader: Record "Receipt Header";
@@ -225,4 +244,7 @@ page 60124 "Receipt Header"
         CanCancelApprovalForFlow: Boolean;
         CanRequestApprovalForFlow: Boolean;
         ReleaseDoc: Codeunit "Document Release";
+        IsOpen: Boolean;
+        IsEditable: Boolean;
+
 }

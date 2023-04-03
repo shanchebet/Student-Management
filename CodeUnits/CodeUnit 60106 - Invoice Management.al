@@ -67,13 +67,14 @@ codeunit 60106 "Invoice Management"
                         GenJnlLine."Account No." := StudentBillSetup."Balancing Account No.";
                         GenJnlLine."Posting Group" := StudentBillSetup."Posting Group";
                         GenJnlLine."Posting Date" := "Posting Date";
+
                         GenJnlLine."Document No." := InvoiceLines.No;
                         GenJnlLine.Description := StrSubstNo('%1 for Invoice Reference No. %2', InvoiceLines."Transaction Type", InvoiceLines.No);
 
                         //DR Student/Customer Account
                         GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::Customer;
                         GenJnlLine."Bal. Account No." := "Bill-to Student No.";
-                        //GenJnlLine."Document Type" := GenJnlLine."Document Type"::Invoice;
+                        GenJnlLine."Document Type" := InvoiceLines."Document Type"::Invoice;
                         GenJnlLine.Amount := -Round(InvoiceLines.Amount);
                         GenJnlLine.Validate(Amount);
                         if GenJnlLine.Amount <> 0 then

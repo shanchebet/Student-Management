@@ -25,6 +25,7 @@ page 60149 "Exam Entries Card"
                     trigger OnLookup(var Text: Text): Boolean
                     var
                         UnitReg: Record "Unit Registration";
+                        UnitRegLines: Record "Unit Registration Line";
                     begin
                         if Page.RunModal(Page::"Unit Registration List", UnitReg) = Action::LookupOK then begin
                             Rec."Student No." := UnitReg."Student No.";

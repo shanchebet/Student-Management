@@ -17,6 +17,11 @@ page 60130 "Student Invoice Lines"
                     Visible = false;
                     ToolTip = 'Specifies the value of the Document No. field.';
                 }
+                field("Document Type"; Rec."Document Type")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Document Type field.';
+                }
                 field(No; Rec.No)
                 {
                     ApplicationArea = All;

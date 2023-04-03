@@ -7,14 +7,16 @@ page 60100 "Applicant Registration"
     UsageCategory = Administration;
     ApplicationArea = All;
 
+
     layout
     {
         area(Content)
         {
+
             group(General)
 
-
             {
+
                 Caption = 'General';
                 field("Application No."; Rec."Application No.")
                 {
@@ -140,6 +142,7 @@ page 60100 "Applicant Registration"
             }
             group("Applicant Field of Study")
             {
+
                 field("Level Of Study"; Rec."Level Of Study")
                 {
                     ApplicationArea = All;
@@ -251,7 +254,7 @@ page 60100 "Applicant Registration"
             }
         }
     }
-    trigger OnAfterGetCurrRecord()
+    trigger OnAfterGetRecord()
 
     begin
 
@@ -260,6 +263,29 @@ page 60100 "Applicant Registration"
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(rec.RECORDID);
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
     end;
+
+    // trigger OnAfterGetCurrRecord()
+    // begin
+    //     if Rec."Approval Status" = Rec."Approval Status"::Released then
+    //         fieldeditable:
+
+    // end;
+
+    // trigger OnOpenPage()
+    // begin
+    //     SetPageControl();
+    //     CurrPage.Update();
+    // end;
+
+    // procedure SetPageControl()
+    // begin
+    //     IsOpen := true;
+    //     IsEditable := true;
+    //     if Rec."Approval Status" <> Rec."Approval Status"::Open then
+    //         IsOpen := false;
+    //     IsEditable := false;
+
+    // end;
 
     var
         myInt: Integer;
@@ -273,4 +299,7 @@ page 60100 "Applicant Registration"
         CanRequestApprovalForFlow: Boolean;
         ReleaseDoc: Codeunit "Document Release";
         EnabledApprovalWorkflowsExist: Boolean;
+        // IsOpen: Boolean;
+        // IsEditable: Boolean;
+        fieldeditable: Boolean;
 }

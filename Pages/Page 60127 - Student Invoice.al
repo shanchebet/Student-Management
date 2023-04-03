@@ -10,10 +10,9 @@ page 60127 "Student Invoice"
     {
         area(Content)
         {
-
             group(GroupName)
             {
-                Editable = Rec.Posted = false;
+                Editable = IsEditable and IsOpen;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -102,9 +101,10 @@ page 60127 "Student Invoice"
             }
             part("Student Invoice Lines"; "Student Invoice Lines")
             {
-                Editable = Rec.Posted = false;
+                //Editable = Rec.Posted = false;
                 SubPageLink = "Document No." = FIELD("No.");
                 ApplicationArea = all;
+                Editable = IsEditable and IsOpen;
                 UpdatePropagation = Both;
             }
         }
@@ -183,6 +183,23 @@ page 60127 "Student Invoice"
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
     end;
 
+    trigger OnOpenPage()
+    begin
+        SetPageControl();
+        CurrPage.Update();
+    end;
+
+    procedure SetPageControl()
+    begin
+        IsOpen := true;
+        IsEditable := true;
+        if Rec.Posted then
+            IsEditable := false;
+        if Rec.Status <> Rec.Status::Open then
+            IsOpen := false;
+
+    end;
+
     var
         myInt: Integer;
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
@@ -196,6 +213,9 @@ page 60127 "Student Invoice"
         ReleaseDoc: Codeunit "Document Release";
         InvMgt: Codeunit "Invoice Management";
         IsPostedInvoices: Boolean;
+        IsOpen: Boolean;
+        IsEditable: Boolean;
+
 
 
 }

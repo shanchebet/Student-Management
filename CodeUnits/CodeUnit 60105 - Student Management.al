@@ -121,5 +121,4 @@ codeunit 60105 "Student Management"
             File.Close();
         end;
     end;
-
 }

@@ -2,7 +2,6 @@ codeunit 60103 "Document Release"
 {
     trigger OnRun()
     begin
-
     end;
 
     procedure UnitRegRelease(var UnitReg: Record "Unit Registration")

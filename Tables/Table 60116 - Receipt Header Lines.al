@@ -57,7 +57,6 @@ table 60116 "Receipt Header Lines"
         {
             DataClassification = CustomerContent;
         }
-
     }
 
     keys

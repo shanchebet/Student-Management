@@ -37,6 +37,10 @@ table 60118 "Student Invoice Lines"
         field(5; "Line No"; Integer)
         {
         }
+        field(6; "Document Type"; Enum "Gen. Journal Document Type")
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 
