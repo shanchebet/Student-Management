@@ -25,6 +25,13 @@ table 60107 "Academic Year"
             Clustered = true;
         }
     }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Academic Year Code", "Academic Year Description")
+        {
+
+        }
+    }
     var
         myInt: Integer;
 

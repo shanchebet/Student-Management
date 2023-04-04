@@ -88,6 +88,11 @@ page 60119 "Unit Registration"
                     Editable = false;
                     ToolTip = 'Specifies the value of the Academic Year Description field.';
                 }
+                field("Register For Exams"; Rec."Register For Exams")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Register For Exams field.';
+                }
             }
             part(Lines; "Units Registration")
             {
@@ -114,7 +119,19 @@ page 60119 "Unit Registration"
             }
             group(Register)
             {
-                action("Register ")
+                action("Register For Units ")
+                {
+                    Image = Action;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    ApplicationArea = All;
+                    trigger OnAction()
+                    begin
+                        ReleaseDoc.UnitRegRelease(Rec);
+                    end;
+                }
+                action("Exams Registration")
                 {
                     Image = Action;
                     Promoted = true;

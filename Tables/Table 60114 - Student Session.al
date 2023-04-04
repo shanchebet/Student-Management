@@ -118,28 +118,32 @@ table 60114 "Student Session"
             Caption = 'Course Description';
         }
 
-
-
-
     }
+
     keys
     {
-        key(PK; "Session Code")
+        key(Key1; "Session Code")
         {
             Clustered = true;
+        }
+        key(Key2; "Student No.")
+        {
+
+        }
+        key(Key3; "Student Name")
+        {
         }
     }
     fieldgroups
     {
-        fieldgroup(dropdown; "Session Code", "Semester Description", "Student No.", "Student Name")
+        fieldgroup(DropDown; "Student No.", "Student Name")
         {
-
         }
-        fieldgroup(Brick; "Session Code", "Semester Description", "Student No.", "Student Name")
+        fieldgroup(Brick; "Student No.", "Student Name")
         {
-
         }
     }
+
     var
         MSMSStudentSetup: Record "Student Management Setup";
         NoSeriesManagement: Codeunit NoSeriesManagement;

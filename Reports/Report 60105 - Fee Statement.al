@@ -10,6 +10,7 @@ report 60105 "Fee Statement"
         dataitem(Customer; Customer)
         {
             RequestFilterFields = "No.";
+            DataItemTableView = sorting("No.") where("Customer Type" = filter(Student));
             column(No_; "No.")
             {
 
@@ -66,6 +67,7 @@ report 60105 "Fee Statement"
             {
 
             }
+
             dataitem("Cust. Ledger Entry"; "Cust. Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No.");
@@ -88,7 +90,6 @@ report 60105 "Fee Statement"
                 {
                 }
             }
-
         }
     }
     trigger OnPreReport()
@@ -100,5 +101,6 @@ report 60105 "Fee Statement"
     var
         CompInfo: Record "Company Information";
         UserSetup: Record "User Setup";
+        AmountSum: Decimal;
 
 }

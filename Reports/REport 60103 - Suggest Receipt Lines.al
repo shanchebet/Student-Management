@@ -9,6 +9,8 @@ report 60103 "Suggest Receipt Lines"
             trigger OnAfterGetRecord()
             begin
                 TestField("Paying Account No");
+                //Clear ReceiptHeader Lines
+                StudMgt.ClearReceiptHeaderLines(ReceiptHeader);
 
                 CustLedger.Reset();
                 CustLedger.SetRange("Customer No.", "Paying Account No");
@@ -45,4 +47,5 @@ report 60103 "Suggest Receipt Lines"
         ReceiptLines: Record "Receipt Header Lines";
         CustLedger: Record "Cust. Ledger Entry";
         LineNo: Integer;
+        StudMgt: Codeunit "Student Management";
 }

@@ -36,7 +36,7 @@ table 60121 "Exam Entries Lines"
             trigger OnValidate()
             begin
                 Stdmgt.Get();
-                if Rec."Exam Marks" > Stdmgt."Max Cat Mark" then
+                if Rec."Cat Marks" > Stdmgt."Max Cat Mark" then
                     Error('Maximum Cat Marks Should be less or Equal to %1', Stdmgt."Max Cat Mark");
                 Validate("Final Mark");
             end;

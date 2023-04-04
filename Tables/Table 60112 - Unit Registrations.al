@@ -160,6 +160,10 @@ table 60112 "Unit Registration"
                 end;
             end;
         }
+        field(16; "Register For Exams"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
@@ -169,6 +173,10 @@ table 60112 "Unit Registration"
             Clustered = true;
         }
 
+    }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "No.", "Student No.", "Student Name", "Level Of Study", "Course Of Study") { }
     }
 
     var

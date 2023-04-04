@@ -18,6 +18,7 @@ page 60100 "Applicant Registration"
             {
 
                 Caption = 'General';
+
                 field("Application No."; Rec."Application No.")
                 {
                     ApplicationArea = All;
@@ -104,6 +105,7 @@ page 60100 "Applicant Registration"
             }
             group("Contacts & Address")
             {
+
                 field("Phone Number"; Rec."Phone Number")
                 {
                     ApplicationArea = All;
@@ -207,9 +209,7 @@ page 60100 "Applicant Registration"
                     Image = SendApprovalRequest;
                     Promoted = true;
                     PromotedCategory = Category6;
-                    // Enabled = not OpenApprovalEntriesExist;
-                    //Enabled = not OpenApprovalEntriesExist AND CanRequestApprovalForFlow;
-                    Visible = not OpenApprovalEntriesExist AND CanRequestApprovalForFlow;
+                    Enabled = Rec."Approval Status" = Rec."Approval Status"::Open;
                     PromotedOnly = true;
                     ApplicationArea = All;
                     trigger OnAction()
@@ -264,11 +264,14 @@ page 60100 "Applicant Registration"
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
     end;
 
-    // trigger OnAfterGetCurrRecord()
+    // trigger OnNewRecord(BelowxRec: Boolean)
     // begin
-    //     if Rec."Approval Status" = Rec."Approval Status"::Released then
-    //         fieldeditable:
+    //     SetPageControl();
+    // end;
 
+    // trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    // begin
+    //     SetPageControl();
     // end;
 
     // trigger OnOpenPage()
@@ -281,10 +284,8 @@ page 60100 "Applicant Registration"
     // begin
     //     IsOpen := true;
     //     IsEditable := true;
-    //     if Rec."Approval Status" <> Rec."Approval Status"::Open then
-    //         IsOpen := false;
-    //     IsEditable := false;
-
+    //     if Rec."Approval Status" <> "Approval Status"::Open then
+    //         IsEditable := false;
     // end;
 
     var
@@ -299,7 +300,7 @@ page 60100 "Applicant Registration"
         CanRequestApprovalForFlow: Boolean;
         ReleaseDoc: Codeunit "Document Release";
         EnabledApprovalWorkflowsExist: Boolean;
-        // IsOpen: Boolean;
-        // IsEditable: Boolean;
+        IsOpen: Boolean;
+        IsEditable: Boolean;
         fieldeditable: Boolean;
 }

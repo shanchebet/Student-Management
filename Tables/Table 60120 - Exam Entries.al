@@ -21,6 +21,17 @@ table 60120 "Exam Entries"
             Caption = 'Student No';
             DataClassification = ToBeClassified;
             TableRelation = "Unit Registration";
+            trigger OnValidate()
+            var
+                Cust: Record Customer;
+                StdMgtSetup: Record "Student Management Setup";
+            begin
+                StdMgtSetup.Get();
+                Cust.Get("Student No.");
+                Cust.CalcFields(Balance);
+                if Cust.Balance > StdMgtSetup."Minimum Fee Balance" then
+                    Error('Fee Balance Should be less or Equal to %1', StdMgtSetup."Minimum Fee Balance");
+            end;
         }
         field(3; "Student Name"; Text[100])
         {
@@ -68,7 +79,12 @@ table 60120 "Exam Entries"
                 end;
             end;
         }
+        field(14; "No series"; code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
+
     keys
     {
         key(PK; "No.")
@@ -87,7 +103,7 @@ table 60120 "Exam Entries"
         if "No." = '' then begin
             MSMSStudentSetup.Get();
             MSMSStudentSetup.TestField("Exam Nos");
-            // NoSeriesManagement.InitSeries(MSMSStudentSetup."Exam Nos", xRec.no);
+            NoSeriesManagement.InitSeries(MSMSStudentSetup."Exam Nos", xRec."No Series", 0D, "No.", "No Series");
         end;
     end;
 }

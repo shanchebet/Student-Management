@@ -57,6 +57,7 @@ report 60106 "Admission Letter Report"
 
             }
 
+
         }
     }
     trigger OnPreReport()

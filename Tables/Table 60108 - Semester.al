@@ -46,6 +46,13 @@ table 60108 Semester
             Clustered = true;
         }
     }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Semester Code", "Semester Description", " Academic Year Code", "Academic Year Description")
+        {
+
+        }
+    }
 
     var
         myInt: Integer;

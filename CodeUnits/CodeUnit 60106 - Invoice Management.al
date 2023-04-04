@@ -5,7 +5,7 @@ codeunit 60106 "Invoice Management"
 
     end;
 
-    var
+
 
     var
         Label1: Label 'The Invoice %1 has already been posted!';
@@ -55,20 +55,17 @@ codeunit 60106 "Invoice Management"
                 InvoiceLines.SetRange("Document No.", "No.");
                 if InvoiceLines.FindSet() then begin
                     repeat
-                        StudentBillSetup.get(InvoiceLines.No);
+                        StudentBillSetup.get(InvoiceLines."No");
                         LineNo := LineNo + 10000;
                         GenJnlLine.Init;
                         GenJnlLine."Journal Template Name" := JnlBatch."Journal Template Name";
                         GenJnlLine."Journal Batch Name" := JnlBatch.Name;
                         GenJnlLine."Line No." := LineNo;
-
                         //  Cr Fee Structure Accounts
                         GenJnlLine."Account Type" := StudentBillSetup."Bal. Account Type";
                         GenJnlLine."Account No." := StudentBillSetup."Balancing Account No.";
-                        GenJnlLine."Posting Group" := StudentBillSetup."Posting Group";
                         GenJnlLine."Posting Date" := "Posting Date";
-
-                        GenJnlLine."Document No." := InvoiceLines.No;
+                        GenJnlLine."Document No." := InvoiceLines."Document No.";
                         GenJnlLine.Description := StrSubstNo('%1 for Invoice Reference No. %2', InvoiceLines."Transaction Type", InvoiceLines.No);
 
                         //DR Student/Customer Account

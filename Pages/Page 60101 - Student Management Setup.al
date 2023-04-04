@@ -108,6 +108,12 @@ page 60101 "Student Management Setup"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Fin Nos field.';
                 }
+                field("Minimum Fee Balance"; Rec."Minimum Fee Balance")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Minimum Fee Balance field.';
+                }
+
             }
             group(Journals)
             {
@@ -121,6 +127,25 @@ page 60101 "Student Management Setup"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the General Journal Batch field.';
+                }
+            }
+            group("Posting Group Setup")
+            {
+
+                field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Gen. Bus. Posting Group field.';
+                }
+                field("VAT Bus. Posting Group"; Rec."VAT Bus. Posting Group")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the VAT Bus. Posting Group field.';
+                }
+                field("Customer Posting Group"; Rec."Customer Posting Group")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Default Student Posting Group field.';
                 }
             }
         }

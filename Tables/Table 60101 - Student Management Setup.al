@@ -124,11 +124,42 @@ table 60101 "Student Management Setup"
         field(17; "Max Cat Mark"; Decimal)
         {
             DataClassification = ToBeClassified;
+            MinValue = 1;
         }
         field(18; "Max Exam Mark"; Decimal)
         {
             DataClassification = ToBeClassified;
+            MinValue = 1;
         }
+        field(19; "Gen. Bus. Posting Group"; Code[20])
+        {
+            Caption = 'Gen. Bus. Posting Group';
+            TableRelation = "Gen. Business Posting Group";
+
+            trigger OnValidate()
+            begin
+                if xRec."Gen. Bus. Posting Group" <> "Gen. Bus. Posting Group" then
+                    if GenBusPostingGrp.ValidateVatBusPostingGroup(GenBusPostingGrp, "Gen. Bus. Posting Group") then
+                        Validate("VAT Bus. Posting Group", GenBusPostingGrp."Def. VAT Bus. Posting Group");
+            end;
+        }
+        field(20; "VAT Bus. Posting Group"; Code[20])
+        {
+            Caption = 'VAT Bus. Posting Group';
+            TableRelation = "VAT Business Posting Group";
+        }
+        field(21; "Customer Posting Group"; Code[20])
+        {
+            Caption = 'Default Student Posting Group';
+            TableRelation = "Customer Posting Group";
+        }
+        field(22; "Minimum Fee Balance"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+            MinValue = 1;
+        }
+
+
     }
     keys
     {
@@ -137,4 +168,7 @@ table 60101 "Student Management Setup"
             Clustered = true;
         }
     }
+    var
+        GenBusPostingGrp: Record "Gen. Business Posting Group";
+
 }

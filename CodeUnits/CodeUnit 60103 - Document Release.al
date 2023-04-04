@@ -20,6 +20,20 @@ codeunit 60103 "Document Release"
         end;
     end;
 
+    // procedure ExamRegistration(var UnitReg: Record "Unit Registration")
+    // var
+    //     Cust: Record Customer;
+    //     StdMgtSetup: Record "Student Management Setup";
+    // begin
+    //     with UnitReg do begin
+    //         StdMgtSetup.Get();
+    //         Cust.Get("Student No.");
+    //         Cust.CalcFields(Balance);
+    //         if Cust.Balance > StdMgtSetup."Minimum Fee Balance" then
+    //             Error('Fee Balance Should be less or Equal to %1', StdMgtSetup."Minimum Fee Balance");
+    //     end;
+    // end;
+
     procedure UnitRegReopen(var UnitReg: Record "Unit Registration Line")
     begin
         with UnitReg do begin
@@ -87,10 +101,18 @@ codeunit 60103 "Document Release"
     procedure CreateApplicant(ApplicantRec: Record "Applicant Registration")
     var
         Cust: Record Customer;
+        StdMgtSetup: Record "Student Management Setup";
     begin
+        StdMgtSetup.Get();
+        StdMgtSetup.TestField("Gen. Bus. Posting Group");
+        StdMgtSetup.TestField("VAT Bus. Posting Group");
+        StdMgtSetup.TestField("Customer Posting Group");
         if ApplicantRec."Approval Status" = ApplicantRec."Approval Status"::Released then begin
             Cust.Init();
             Cust.TransferFields(ApplicantRec);
+            Cust."Gen. Bus. Posting Group" := StdMgtSetup."Gen. Bus. Posting Group";
+            Cust."VAT Bus. Posting Group" := StdMgtSetup."VAT Bus. Posting Group";
+            Cust."Customer Posting Group" := StdMgtSetup."Customer Posting Group";
             Cust.Insert();
         end;
     end;

@@ -107,6 +107,13 @@ table 60109 "Finance Structure"
             Clustered = true;
         }
     }
+    fieldgroups
+    {
+        fieldgroup(DropDown; Code, "Transaction Type", Amount, Frequency)
+        {
+
+        }
+    }
 
     var
         MSMSStudentSetup: Record "Student Management Setup";
