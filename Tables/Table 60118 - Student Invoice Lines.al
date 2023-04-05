@@ -46,7 +46,7 @@ table 60118 "Student Invoice Lines"
 
     keys
     {
-        key(PK; "Document No.", No)
+        key(PK; "Document No.", No, "Line No")
         {
             Clustered = true;
         }

@@ -162,7 +162,8 @@ page 60124 "Receipt Header"
                     PromotedCategory = Category6;
                     PromotedOnly = true;
                     ApplicationArea = All;
-                    Enabled = not OpenApprovalEntriesExist;
+                    //Enabled = not OpenApprovalEntriesExist;
+                    Enabled = Rec.Status = Rec.Status::open;
                     trigger OnAction()
                     begin
                         IF ApprovalsMgmtCut.CheckReceiptApprovalsWorkflowEnabled(Rec) then

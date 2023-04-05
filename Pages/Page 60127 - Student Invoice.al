@@ -127,6 +127,8 @@ page 60127 "Student Invoice"
                     begin
                         IF ApprovalsMgmtCut.CheckInvoiceApprovalsWorkflowEnabled(Rec) then
                             ApprovalsMgmtCut.OnSendInvoiceForApproval(Rec);
+                        // Commit();
+                        // CurrPage.Close();
                     end;
                 }
                 action("Cancel Approval Request")
@@ -170,6 +172,26 @@ page 60127 "Student Invoice"
                             InvMgt.PostInvoice(Rec);
                     end;
                 }
+
+                action("Get Students Invoice Lines")
+                {
+                    ApplicationArea = all;
+                    Image = Suggest;
+                    PromotedCategory = Process;
+                    Promoted = true;
+                    PromotedOnly = true;
+
+                    trigger OnAction()
+
+                    begin
+                        studinv.Reset();
+                        studinv.SetRange("No.", Rec."No.");
+
+                        if studinv.FindFirst() then
+                            Report.Run(Report::"Suggest Invoice Line", false, false, studinv);
+                    end;
+                }
+
             }
         }
     }
@@ -215,8 +237,6 @@ page 60127 "Student Invoice"
         IsPostedInvoices: Boolean;
         IsOpen: Boolean;
         IsEditable: Boolean;
-
-
-
+        studinv: Record "Student Invoice";
 }
 

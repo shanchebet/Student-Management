@@ -47,6 +47,18 @@ codeunit 60105 "Student Management"
         end;
 
     end;
+    // Clear student Invoice lines
+    procedure ClearStudentInvoiceLines(StdInv: Record "Student Invoice")
+    var
+        StdInvRec: Record "Student Invoice Lines";
+    begin
+        with StdInv do begin
+            StdInvRec.Reset();
+            StdInvRec.SetRange("Document No.", "No.");
+            StdInvRec.DeleteAll();
+        end;
+
+    end;
     //procedure for checking the cluster points in applicant card.
     procedure CheckClusterPointsRange(var ClusterReg: Record "Applicant Registration")
     var

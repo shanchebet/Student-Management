@@ -93,4 +93,29 @@ codeunit 60106 "Invoice Management"
             end;
         end;
     end;
+
+    //Used to suggest lines for Invoicingnin the student Invoice
+    // procedure GetStudentInvoiceLines(var StudentInv: Record "Student Invoice")
+    // var
+    //     Finance: Record "Finance Structure";
+    //     StudentInvLines: Record "Student Invoice Lines";
+    //     lineNo: Integer;
+    // begin
+    //     Finance.Reset();
+    //     Finance.SetRange(Course, StudentInv."Course Of Study");
+    //     Finance.SetRange("Academic Year", StudentInv."Academic Year Code");
+    //     if Finance.FindSet() then
+    //         repeat
+    //             lineNo := lineNo + 10000;
+    //             StudentInvLines.Init();
+    //             StudentInvLines."Line No" := lineNo;
+    //             StudentInvLines."Document No." := StudentInv."No.";
+    //             //StudentInvLines."Document Type" := StudentInvLines."Document Type"::Invoice;
+    //             StudentInvLines.No := Finance."Code";
+    //             StudentInvLines."Transaction Type" := Finance."Transaction Type";
+    //             StudentInvLines.Amount := Finance.Amount;
+    //             StudentInvLines.Insert();
+    //         until StudentInvLines.Next() = 0;
+    // end;
+
 }
