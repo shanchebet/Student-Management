@@ -85,7 +85,7 @@ codeunit 60103 "Document Release"
             ApplicantRec.Modify();
             //CreateApplicant(ApplicantRec);
             CreateApplicant(ApplicantRec);
-            StudMgt.EmailAdmissionLetter(ApplicantRec);
+            //StudMgt.EmailAdmissionLetter(ApplicantRec);
         end;
     end;
 

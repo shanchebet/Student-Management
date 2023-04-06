@@ -23,7 +23,6 @@ report 60107 "Suggest Invoice Line"
                         StudentInvLines.Init();
                         StudentInvLines."Line No" += lineNo;
                         StudentInvLines."Document No." := "No.";
-                        StudentInvLines."Document Type" := StudentInvLines."Document Type"::Invoice;
                         StudentInvLines.No := Finance."Code";
                         StudentInvLines."Transaction Type" := Finance."Transaction Type";
                         StudentInvLines.Amount := Finance.Amount;

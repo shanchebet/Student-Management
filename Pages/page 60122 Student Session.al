@@ -18,6 +18,7 @@ page 60122 "Student Session"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Session Code field.';
+                    Editable = false;
                 }
                 field("Session Description"; Rec."Session Description")
                 {
@@ -33,6 +34,7 @@ page 60122 "Student Session"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Stdent Name field.';
+                    Editable = false;
                 }
                 field("Level Of Study"; Rec."Level Of Study")
                 {
@@ -43,16 +45,19 @@ page 60122 "Student Session"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Course Of Study field.';
+                    Editable = false;
                 }
                 field("Course Description"; Rec."Course Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Course Description field.';
+                    Editable = false;
                 }
                 field("School Description"; Rec."School Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the School Description field.';
+                    Editable = false;
                 }
 
                 field("Semester Code"; Rec."Semester Code")
@@ -64,16 +69,19 @@ page 60122 "Student Session"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Semester Description field.';
+                    Editable = false;
                 }
                 field("Academic Year Code"; Rec."Academic Year Code")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Academic Year Code field.';
+                    Editable = false;
                 }
                 field("Academic Year Description"; Rec."Academic Year Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Academic Year Description field.';
+                    Editable = false;
                 }
                 field(Reported; Rec.Reported)
                 {

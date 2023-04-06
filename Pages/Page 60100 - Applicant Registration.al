@@ -7,7 +7,6 @@ page 60100 "Applicant Registration"
     UsageCategory = Administration;
     ApplicationArea = All;
 
-
     layout
     {
         area(Content)
@@ -16,6 +15,7 @@ page 60100 "Applicant Registration"
             group(General)
 
             {
+                Editable = IsEditable;
 
                 Caption = 'General';
 
@@ -105,7 +105,7 @@ page 60100 "Applicant Registration"
             }
             group("Contacts & Address")
             {
-
+                Editable = IsEditable;
                 field("Phone Number"; Rec."Phone Number")
                 {
                     ApplicationArea = All;
@@ -144,7 +144,7 @@ page 60100 "Applicant Registration"
             }
             group("Applicant Field of Study")
             {
-
+                Editable = IsEditable;
                 field("Level Of Study"; Rec."Level Of Study")
                 {
                     ApplicationArea = All;
@@ -187,6 +187,7 @@ page 60100 "Applicant Registration"
         area(Processing)
         {
             group(Approval)
+
             {
                 action(Approve)
                 {
@@ -220,13 +221,12 @@ page 60100 "Applicant Registration"
                         Rec.TestField("Course Of Study");
                         IF ApprovalsMgmtCut.CheckApplicantRegApprovalsWorkflowEnabled(Rec) then
                             ApprovalsMgmtCut.OnSendApplicantRegForApproval(Rec);
+
                     end;
                 }
                 action("Cancel Approval Request")
                 {
                     Enabled = CanCancelApprovalForRecord OR CanCancelApprovalForFlow;
-                    //Enabled = OpenApprovalEntriesExist;
-
                     Image = CancelApprovalRequest;
                     PromotedCategory = Category6;
                     Promoted = true;
@@ -252,41 +252,75 @@ page 60100 "Applicant Registration"
                     end;
                 }
             }
+            action(Email)
+            {
+                ApplicationArea = all;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                Promoted = true;
+                Image = SendMail;
+                trigger OnAction()
+                var
+                    myInt: Integer;
+                begin
+                    stud.EmailAdmissionLetter(Rec);
+                end;
+
+            }
         }
     }
     trigger OnAfterGetRecord()
 
     begin
-
         OpenApprovalEntriesExistForCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(rec.RecordId);
         OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(rec.RECORDID);
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(rec.RECORDID);
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
+        Clear(Rec);
     end;
 
-    // trigger OnNewRecord(BelowxRec: Boolean)
-    // begin
-    //     SetPageControl();
-    // end;
+    trigger OnOpenPage()
+    begin
 
-    // trigger OnInsertRecord(BelowxRec: Boolean): Boolean
-    // begin
-    //     SetPageControl();
-    // end;
+        SetPageControl();
+        Clear(Rec);
+        CurrPage.Update();
 
-    // trigger OnOpenPage()
-    // begin
-    //     SetPageControl();
-    //     CurrPage.Update();
-    // end;
+        // Rec.RESET;
+        // if not Rec.GET then begin
+        //     Rec.INIT;
+        //     Rec.INSERT;
+        // end;
 
-    // procedure SetPageControl()
-    // begin
-    //     IsOpen := true;
-    //     IsEditable := true;
-    //     if Rec."Approval Status" <> "Approval Status"::Open then
-    //         IsEditable := false;
-    // end;
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        SetPageControl();
+        CurrPage.Update();
+    end;
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        SetPageControl();
+        CurrPage.Update();
+    end;
+
+    procedure SetPageControl()
+    begin
+        IsEditable := true;
+        case Rec."Approval Status" of
+            Rec."Approval Status"::" ",
+            Rec."Approval Status"::Pending,
+            Rec."Approval Status"::Rejected,
+        Rec."Approval Status"::Canceled,
+        Rec."Approval Status"::Released:
+                begin
+                    IsEditable := false;
+                end;
+
+        end;
+    end;
 
     var
         myInt: Integer;
@@ -300,7 +334,8 @@ page 60100 "Applicant Registration"
         CanRequestApprovalForFlow: Boolean;
         ReleaseDoc: Codeunit "Document Release";
         EnabledApprovalWorkflowsExist: Boolean;
-        IsOpen: Boolean;
-        IsEditable: Boolean;
+
         fieldeditable: Boolean;
+        stud: Codeunit "Student Management";
+        IsEditable: Boolean;
 }

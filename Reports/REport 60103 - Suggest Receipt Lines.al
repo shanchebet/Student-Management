@@ -29,7 +29,6 @@ report 60103 "Suggest Receipt Lines"
                             ReceiptLines."Account No" := ReceiptHeader."Paying Account No";
                             ReceiptLines.Validate("Account No");
                             ReceiptLines."Transaction Type" := CustLedger.Description;
-                            ReceiptLines."Applies-to Doc. Type" := ReceiptLines."Applies-to Doc. Type"::Payment;
                             ReceiptLines."Applies-to Doc. No." := CustLedger."Document No.";
                             ReceiptLines."Invoiced Amount" := Abs(CustLedger."Remaining Amount");
                             if ReceiptLines."Invoiced Amount" > 0 then

@@ -71,7 +71,6 @@ codeunit 60106 "Invoice Management"
                         //DR Student/Customer Account
                         GenJnlLine."Bal. Account Type" := GenJnlLine."Bal. Account Type"::Customer;
                         GenJnlLine."Bal. Account No." := "Bill-to Student No.";
-                        GenJnlLine."Document Type" := InvoiceLines."Document Type"::Invoice;
                         GenJnlLine.Amount := -Round(InvoiceLines.Amount);
                         GenJnlLine.Validate(Amount);
                         if GenJnlLine.Amount <> 0 then

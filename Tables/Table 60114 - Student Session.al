@@ -54,6 +54,8 @@ table 60114 "Student Session"
             trigger OnValidate()
             var
                 Sem: Record "Semester";
+                studentSession: Record "Student Session";
+
             begin
                 Sem.Reset();
                 Sem.SetRange("Semester Code", "Semester Code");
@@ -61,6 +63,16 @@ table 60114 "Student Session"
                     "Semester Description" := sem."Semester Description";
                     "Academic Year Code" := Sem." Academic Year Code";
                     Validate("Academic Year Code");
+                    studentSession.Reset();
+                    studentSession.SetRange("Semester Code", Rec."Semester Code");
+                    studentSession.SetRange("Academic Year Code", Rec."Academic Year Code");
+                    if not studentSession.FindFirst() then begin
+                        Rec."Semester Code" := Sem."Semester Code";
+                        Rec."Semester Description" := Sem."Semester Description";
+                        Rec."Academic Year Code" := "Academic Year Code";
+                        Rec."Academic Year Description" := "Academic Year Description";
+                    end else
+                        Error('The record already Exists for semseter %1 and Semester %2', studentSession."Semester Description", studentSession."Academic Year Code");
                 end;
             end;
         }
@@ -78,9 +90,11 @@ table 60114 "Student Session"
             trigger OnValidate()
             var
                 AC: Record "Academic Year";
+
             begin
                 if AC.Get("Academic Year Code") then
-                    "Academic Year Description" := AC."Academic Year Description"
+                    "Academic Year Description" := AC."Academic Year Description";
+
             end;
         }
         field(8; "Academic Year Description"; Text[100])

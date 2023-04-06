@@ -58,6 +58,7 @@ page 60115 "Finance Structure"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Posting Group field.';
+                    Visible = false;
                 }
                 field("Student Category"; Rec."Student Category")
                 {

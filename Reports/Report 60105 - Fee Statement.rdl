@@ -612,7 +612,7 @@
       <Width>19.939cm</Width>
       <Page>
         <PageHeader>
-          <Height>5.64444cm</Height>
+          <Height>8.62894cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -631,8 +631,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>2.87728cm</Top>
-              <Left>0.4845cm</Left>
+              <Top>5.84089cm</Top>
+              <Left>0.48449cm</Left>
               <Height>0.6cm</Height>
               <Width>19.30633cm</Width>
               <Style>
@@ -660,8 +660,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox4</rd:DefaultName>
-              <Top>4.3595cm</Top>
-              <Left>0.4845cm</Left>
+              <Top>7.32311cm</Top>
+              <Left>0.48449cm</Left>
               <Height>0.6cm</Height>
               <Width>19.30633cm</Width>
               <ZIndex>1</ZIndex>
@@ -690,8 +690,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox6</rd:DefaultName>
-              <Top>4.9595cm</Top>
-              <Left>0.4845cm</Left>
+              <Top>7.92311cm</Top>
+              <Left>0.48449cm</Left>
               <Height>0.6cm</Height>
               <Width>19.30633cm</Width>
               <ZIndex>2</ZIndex>
@@ -720,8 +720,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox10</rd:DefaultName>
-              <Top>3.58311cm</Top>
-              <Left>0.4845cm</Left>
+              <Top>6.54672cm</Top>
+              <Left>0.48449cm</Left>
               <Height>0.6cm</Height>
               <Width>19.30633cm</Width>
               <ZIndex>3</ZIndex>
@@ -751,6 +751,142 @@
                 </Border>
               </Style>
             </Image>
+            <Textbox Name="Textbox13">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!CompName.Value</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox13</rd:DefaultName>
+              <Top>3.01755cm</Top>
+              <Left>0.48451cm</Left>
+              <Height>0.6cm</Height>
+              <Width>19.30631cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox14">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!CompAddress.Value</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox14</rd:DefaultName>
+              <Top>3.68811cm</Top>
+              <Left>0.48451cm</Left>
+              <Height>0.6cm</Height>
+              <Width>19.30631cm</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox15">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!CompEmail.Value</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox15</rd:DefaultName>
+              <Top>4.39394cm</Top>
+              <Left>0.48451cm</Left>
+              <Height>0.6cm</Height>
+              <Width>19.30631cm</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox16">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!CompCity.Value</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox16</rd:DefaultName>
+              <Top>5.0645cm</Top>
+              <Left>0.48451cm</Left>
+              <Height>0.6cm</Height>
+              <Width>19.30631cm</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
           </ReportItems>
           <Style>
             <Border>
@@ -831,7 +967,7 @@
             </Border>
           </Style>
         </PageFooter>
-        <PageHeight>27.94cm</PageHeight>
+        <PageHeight>24cm</PageHeight>
         <PageWidth>21.59cm</PageWidth>
         <LeftMargin>0.25cm</LeftMargin>
         <RightMargin>0.25cm</RightMargin>

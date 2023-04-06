@@ -17,6 +17,7 @@ page 60127 "Student Invoice"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.';
+                    Editable = false;
                 }
                 field("Bill-to Student No."; Rec."Bill-to Student No.")
                 {
@@ -50,47 +51,56 @@ page 60127 "Student Invoice"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Stdent Name field.';
+                    Editable = false;
                 }
                 field("Level Of Study"; Rec."Level Of Study")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Level Of Study field.';
+                    Editable = false;
                 }
                 field("Course Of Study"; Rec."Course Of Study")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Course of Study field.';
+                    Editable = false;
                 }
                 field("Course Description"; Rec."Course Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Course Description field.';
+                    Editable = false;
                 }
                 field("Academic Year Code"; Rec."Academic Year Code")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Academic Year Code field.';
+                    Editable = false;
                 }
                 field("School Description"; Rec."School Description")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the School Description field.';
+                    Editable = false;
                 }
                 field(Semester; Rec.Semester)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Semester field.';
+                    Editable = false;
                 }
                 field("Posting Date"; Rec."Posting Date")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Posting Date field.';
+
                 }
                 field("Invoiced Amount"; Rec."Invoiced Amount")
                 {
                     ApplicationArea = All;
                     Editable = false;
                     ToolTip = 'Specifies the value of the Invoiced Amount field.';
+
                 }
                 field(Posted; Rec.Posted)
                 {
@@ -101,7 +111,6 @@ page 60127 "Student Invoice"
             }
             part("Student Invoice Lines"; "Student Invoice Lines")
             {
-                //Editable = Rec.Posted = false;
                 SubPageLink = "Document No." = FIELD("No.");
                 ApplicationArea = all;
                 Editable = IsEditable and IsOpen;
@@ -121,14 +130,14 @@ page 60127 "Student Invoice"
                     Promoted = true;
                     PromotedCategory = Category6;
                     PromotedOnly = true;
-                    Enabled = not OpenApprovalEntriesExist;
+                    Enabled = Rec.Status = Rec.Status::Open;
                     ApplicationArea = All;
                     trigger OnAction()
                     begin
                         IF ApprovalsMgmtCut.CheckInvoiceApprovalsWorkflowEnabled(Rec) then
                             ApprovalsMgmtCut.OnSendInvoiceForApproval(Rec);
-                        // Commit();
-                        // CurrPage.Close();
+                        Commit();
+                        CurrPage.Close();
                     end;
                 }
                 action("Cancel Approval Request")

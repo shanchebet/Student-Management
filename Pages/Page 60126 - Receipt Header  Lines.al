@@ -40,6 +40,7 @@ page 60126 "Receipt Header Lines"
                     ApplicationArea = All;
                     Editable = false;
                     ToolTip = 'Specifies the value of the Applies-to Doc. Type field.';
+                    Visible = false;
                 }
 
                 field("Account No"; Rec."Account No")

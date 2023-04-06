@@ -54,7 +54,6 @@ codeunit 60107 Payments
                         GenJnlLine."Journal Template Name" := JnlBatch."Journal Template Name";
                         GenJnlLine."Journal Batch Name" := JnlBatch.Name;
                         GenJnlLine."Line No." := LineNo;
-                        GenJnlLine."Document Type" := ReceiptLines."Applies-to Doc. Type"::Payment;
                         GenJnlLine."Account Type" := ReceiptLines."Account Type"::Customer;
                         GenJnlLine."Account No." := ReceiptLines."Account No";
                         GenJnlLine.Validate("Account No.");

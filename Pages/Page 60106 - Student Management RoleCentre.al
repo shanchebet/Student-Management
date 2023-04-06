@@ -26,12 +26,12 @@ page 60106 "Student Management RoleCentre"
         {
             group("Applications Portal")
             {
-                // action("Applicant Registration")
-                // {
-                //     ApplicationArea = Basic, Suite;
-                //     Caption = 'Applicant Registration';
-                //     RunObject = page "Applicant Registration";
-                // }
+                action("Applicant Registration card")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Applicant Registration';
+                    RunObject = page "Applicant Registration";
+                }
                 action("Applicant Registration List")
                 {
                     ApplicationArea = Basic, Suite;

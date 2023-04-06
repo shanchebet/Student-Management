@@ -21,11 +21,13 @@ page 60130 "Student Invoice Lines"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Document Type field.';
+                    Visible = false;
                 }
                 field(No; Rec.No)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No field.';
+                    Editable = false;
                 }
                 field("Line No"; Rec."Line No")
                 {

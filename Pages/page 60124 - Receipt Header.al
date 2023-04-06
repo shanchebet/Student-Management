@@ -17,6 +17,7 @@ page 60124 "Receipt Header"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No field.';
+                    Editable = false;
                 }
                 field(Description; Rec.Description)
                 {
@@ -27,6 +28,7 @@ page 60124 "Receipt Header"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Posting Date field.';
+
                 }
 
 
@@ -40,6 +42,7 @@ page 60124 "Receipt Header"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Currency Code field.';
+                    Visible = false;
                 }
                 field("Date Posted"; Rec."Date Posted")
                 {
@@ -51,6 +54,7 @@ page 60124 "Receipt Header"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Pay Mode field.';
+                    Visible = false;
                 }
                 field("Paying Account Type"; Rec."Paying Account Type")
                 {
@@ -105,7 +109,6 @@ page 60124 "Receipt Header"
             }
             part("Receipt Header Lines"; "Receipt Header Lines")
             {
-                //Editable = Rec.Posted = false;
                 SubPageLink = "Document No" = FIELD("No.");
                 ApplicationArea = all;
                 Editable = IsEditable and IsOpen;

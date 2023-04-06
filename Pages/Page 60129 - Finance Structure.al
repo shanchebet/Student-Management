@@ -50,6 +50,7 @@ page 60129 "Finance Structure Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Posting Group field.';
+                    Visible = false;
                 }
                 field(Semester; Rec.Semester)
                 {
