@@ -16,7 +16,7 @@ page 60149 "Exam Entries Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.';
-                    Visible = false;
+                    //Visible = false;
                 }
 
                 field("Student No."; Rec."Student No.")

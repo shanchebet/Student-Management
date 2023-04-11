@@ -276,14 +276,14 @@ page 60100 "Applicant Registration"
         OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(rec.RECORDID);
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(rec.RECORDID);
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
-        Clear(Rec);
+        //Clear(Rec);
     end;
 
     trigger OnOpenPage()
     begin
 
         SetPageControl();
-        Clear(Rec);
+        //Clear(Rec);
         CurrPage.Update();
 
         // Rec.RESET;
@@ -294,17 +294,17 @@ page 60100 "Applicant Registration"
 
     end;
 
-    trigger OnNewRecord(BelowxRec: Boolean)
-    begin
-        SetPageControl();
-        CurrPage.Update();
-    end;
+    // trigger OnNewRecord(BelowxRec: Boolean)
+    // begin
+    //     SetPageControl();
+    //     CurrPage.Update();
+    // end;
 
-    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
-    begin
-        SetPageControl();
-        CurrPage.Update();
-    end;
+    // trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    // begin
+    //     SetPageControl();
+    //     CurrPage.Update();
+    // end;
 
     procedure SetPageControl()
     begin

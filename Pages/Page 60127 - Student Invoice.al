@@ -169,7 +169,7 @@ page 60127 "Student Invoice"
                 }
                 action("Invoice Student")
                 {
-                    Enabled = Rec.Status = Rec.Status::Released;
+                    Enabled = (Rec.Status = Rec.Status::Released) and not rec.Posted;
                     Image = Post;
                     PromotedCategory = Process;
                     Promoted = true;
@@ -185,6 +185,7 @@ page 60127 "Student Invoice"
                 action("Get Students Invoice Lines")
                 {
                     ApplicationArea = all;
+                    Enabled = Rec.Status = Rec.Status::Open;
                     Image = Suggest;
                     PromotedCategory = Process;
                     Promoted = true;

@@ -124,6 +124,7 @@ page 60124 "Receipt Header"
         {
             action("Suggest Receipt Lines")
             {
+                Enabled = Rec.Status = Rec.Status::Open;
                 Image = Process;
                 PromotedCategory = Process;
                 Promoted = true;
@@ -141,12 +142,13 @@ page 60124 "Receipt Header"
             }
             action("Post Receipt")
             {
-                Enabled = Rec.Status = Rec.Status::Released;
+                Enabled = (Rec.Status = Rec.Status::Released) and not rec.Posted;
                 Image = Post;
                 PromotedCategory = Process;
                 Promoted = true;
                 PromotedOnly = true;
                 ApplicationArea = All;
+
 
                 trigger OnAction()
                 begin

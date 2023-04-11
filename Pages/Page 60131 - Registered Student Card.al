@@ -401,22 +401,42 @@ page 60131 "Registered Student Card"
     {
         area(Navigation)
         {
-            action(Report)
+            group(Report)
             {
-                ApplicationArea = All;
-                Caption = 'Fee Statement Report';
-                Image = Entry;
-                Promoted = true;
-                PromotedCategory = Process;
 
-                trigger OnAction()
-                begin
-                    Customer.Reset();
-                    Customer.SetRange("No.", Rec."No.");
-                    Customer.SetFilter("Name", '%1', Rec."Name");
-                    CustReport.SetTableView(Customer);
-                    CustReport.Run();
-                end;
+                action("Fee Structure")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Fee Statement Report';
+                    Image = Entry;
+                    Promoted = true;
+                    PromotedCategory = Process;
+
+                    trigger OnAction()
+                    begin
+                        Customer.Reset();
+                        Customer.SetRange("No.", Rec."No.");
+                        Customer.SetFilter("Name", '%1', Rec."Name");
+                        CustReport.SetTableView(Customer);
+                        CustReport.Run();
+                    end;
+                }
+                action(Transcript)
+                {
+                    ApplicationArea = all;
+                    Caption = 'Transcript';
+                    Image = Entry;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    trigger OnAction()
+                    begin
+                        Customer.Reset();
+                        Customer.SetRange("No.", Rec."No.");
+                        Customer.SetFilter(Name, '%1', Rec.Name);
+                        CustTrans.SetTableView(Customer);
+                        CustTrans.Run();
+                    end;
+                }
             }
         }
     }
@@ -425,6 +445,7 @@ page 60131 "Registered Student Card"
     var
         Customer: Record Customer;
         CustReport: Report "Fee Statement";
+        CustTrans: Report "Transcript Report";
         StyleTxt: Text;
         [InDataSet]
         ContactEditable: Boolean;
