@@ -8,7 +8,9 @@ page 60117 "Student ManagementCues"
     {
         area(content)
         {
-            cuegroup("Student Management")
+            //cuegroup("Student Management")
+            //{
+            cuegroup("Application Portal")
             {
 
                 field("Registered Student List"; Rec."Registered Student List")
@@ -24,8 +26,6 @@ page 60117 "Student ManagementCues"
                     DrillDownPageId = "Open Applicant Registration";
                     ToolTip = 'Specifies the value of the Open Applicant Registartion field.';
                 }
-
-
                 field("Pending Applicant Registation "; Rec."Pending Applicant Registration")
                 {
                     ApplicationArea = All;
@@ -46,6 +46,36 @@ page 60117 "Student ManagementCues"
                     DrillDownPageId = "Approved ApplicantRegistration";
                     Caption = 'Approved Applicant Registration';
                     ToolTip = 'Specifies the value of the Approved ApplicantRegistration field.';
+                }
+            }
+
+            //}
+            cuegroup("Units Registration")
+            {
+
+                field(" Open Units Registration"; Rec." Open Units Registration")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageId = "open Unit Registration";
+                    ToolTip = 'Specifies the value of the  Open Units Registration field.';
+                }
+                field(" Pending Units Registration"; Rec." Pending Units Registration")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageId = "Pending Unit Registration";
+                    ToolTip = 'Specifies the value of the  Pending Units Registration field.';
+                }
+                field(" Rejected Units Registration"; Rec." Rejected Units Registration")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageId = "Rejected Unit Registration";
+                    ToolTip = 'Specifies the value of the  Rejected Units Registration field.';
+                }
+                field(" Released Units Registration"; Rec." Released Units Registration")
+                {
+                    ApplicationArea = All;
+                    DrillDownPageId = "Released Unit Registration";
+                    ToolTip = 'Specifies the value of the  Released Units Registration field.';
                 }
             }
             cuegroup("Finance Management")

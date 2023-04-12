@@ -437,6 +437,31 @@ page 60131 "Registered Student Card"
                         CustTrans.Run();
                     end;
                 }
+                action("Exam Card")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Exam Card';
+                    Image = Entry;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    trigger OnAction()
+                    var
+
+                    begin
+                        Customer.Reset();
+                        Customer.SetRange("No.", Rec."No.");
+                        Customer.SetFilter(Name, '%1', Rec.Name);
+                        if Customer.FindFirst() then begin
+                            Customer.CalcFields("Balance (LCY)");
+                            if Customer."Balance (LCY)" < studmgmt."Minimum Fee Balance" then begin
+                                CustExamCard.SetTableView(Customer);
+                                CustExamCard.Run();
+                            end else
+                                Error('Please Clear Your Fee Balance for you to Proceed to print Exam Card!!!');
+                        end;
+                    end;
+
+                }
             }
         }
     }
@@ -444,8 +469,10 @@ page 60131 "Registered Student Card"
 
     var
         Customer: Record Customer;
+        studmgmt: Record "Student Management Setup";
         CustReport: Report "Fee Statement";
         CustTrans: Report "Transcript Report";
+        CustExamCard: Report "Exam Card";
         StyleTxt: Text;
         [InDataSet]
         ContactEditable: Boolean;
