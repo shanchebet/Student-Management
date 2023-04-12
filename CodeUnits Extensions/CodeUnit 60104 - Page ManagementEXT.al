@@ -15,6 +15,8 @@ codeunit 60104 "Page Management EXT"
                 PageId := GetConditionalCardPageId(RecordRef);
             Database::"Receipt Header":
                 PageId := GetConditionalCardPageId(RecordRef);
+            Database::"Unit Registration":
+                PageId := GetConditionalCardPageId(RecordRef)
         end;
     end;
 
@@ -27,6 +29,8 @@ codeunit 60104 "Page Management EXT"
                 exit(Page::"Student Invoice");
             Database::"Receipt Header":
                 exit(Page::"Receipt Header");
+            Database::"Unit Registration":
+                exit(Page::"Unit Registration");
         end;
     end;
 

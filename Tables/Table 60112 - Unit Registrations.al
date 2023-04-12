@@ -101,35 +101,46 @@ table 60112 "Unit Registration"
         field(12; Semester; Code[30])
         {
             DataClassification = CustomerContent;
-            TableRelation = Semester."Semester Code";
+            TableRelation = Semester;
+            // trigger OnValidate()
+            // var
+            //     SemRec: Record Semester;
+            // begin
+            //     SemRec.Reset();
+            //     SemRec.SetRange("Semester Code", Semester);
+            //     if SemRec.FindFirst() then begin
+            //         "Academic Year Code" := SemRec." Academic Year Code";
+            //         "Academic Year Description" := SemRec."Academic Year Description";
+            //     end;
+            // end;
 
-            trigger OnValidate()
-            var
-                SemRec: Record Semester;
-            begin
+            // trigger OnValidate()
+            // var
+            //     SemRec: Record Semester;
+            // begin
 
-                //Clear Unit Registration Lines
-                StudMgt.ClearUnitRegistrationLines(Rec);
-                //Insert Into the Unit Registration lines from Unit Matrix Table(Record)
+            //     //Clear Unit Registration Lines
+            //     StudMgt.ClearUnitRegistrationLines(Rec);
+            //     //Insert Into the Unit Registration lines from Unit Matrix Table(Record)
 
-                UnitMat.Reset();
-                UnitMat.SetRange("Academic Year Code", "Academic Year Code");
-                UnitMat.SetRange("Semester Code", Semester);
-                UnitMat.SetRange("Course Code", "Course Of Study");
-                UnitMat.SetRange("Course Description", "Course Description");
-                if UnitMat.Find('-') then begin
-                    //repeat
-                    LineNo := 10000;//Set The Starting Value of Line No and Increment as the Record is generated
-                    UnitRegLines.Init();//Initializes the records
-                    UnitRegLines."Line No" += LineNo;
-                    UnitRegLines."Document No." := "No.";
-                    UnitRegLines."Unit Code" := UnitMat."Unit Code";
-                    UnitRegLines.Validate("Unit Code");
-                    UnitRegLines."Unit Core/Elective" := UnitMat."Unit Core/Elective";
-                    UnitRegLines.Insert();
-                    // until UnitMat.Next() = 0;
-                end;
-            end;
+            //     // UnitMat.Reset();
+            //     // UnitMat.SetRange("Academic Year Code", "Academic Year Code");
+            //     // UnitMat.SetRange("Semester Code", Semester);
+            //     // UnitMat.SetRange("Course Code", "Course Of Study");
+            //     // UnitMat.SetRange("Course Description", "Course Description");
+            //     // if UnitMat.Find('-') then begin
+            //         //repeat
+            //         // LineNo := 10000;//Set The Starting Value of Line No and Increment as the Record is generated
+            //         // UnitRegLines.Init();//Initializes the records
+            //         // UnitRegLines."Line No" += LineNo;
+            //         // UnitRegLines."Document No." := "No.";
+            //         // UnitRegLines."Unit Code" := UnitMat."Unit Code";
+            //         // UnitRegLines.Validate("Unit Code");
+            //         // UnitRegLines."Unit Core/Elective" := UnitMat."Unit Core/Elective";
+            //         // UnitRegLines.Insert();
+            //         // until UnitMat.Next() = 0;
+            //     end;
+            // end;
         }
         field(13; "Academic Year Description"; Text[100])
         {
@@ -163,6 +174,20 @@ table 60112 "Unit Registration"
         field(16; "Register For Exams"; Boolean)
         {
             DataClassification = ToBeClassified;
+        }
+        field(17; "Status"; enum "Approval Status")
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(18; "Unit Status"; Enum "Unit Status")
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Status Of the Units';
+        }
+        field(19; "Total Unit Selected"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count("Unit Registration Line" where(Select = const(true), "Document No." = field("No.")));
         }
     }
 
@@ -199,6 +224,7 @@ table 60112 "Unit Registration"
             NoSeriesManagement.InitSeries(MSMSStudentSetup."Unit Nos", MSMSStudentSetup."Unit Nos", WorkDate(), "No.", MSMSStudentSetup."Unit Nos");
 
         end;
+        Status := Status::Open;
     end;
 
     procedure AssistEdit(Unit: Record "Unit Registration"): Boolean

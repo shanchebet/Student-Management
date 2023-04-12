@@ -16,8 +16,8 @@
   "application": "18.0.0.0",
   "idRanges": [
     {
-      "from": 60100,
-      "to": 60149
+      "from": 1,
+      "to": 51530000
     }
   ],
   "showMyCode": true,

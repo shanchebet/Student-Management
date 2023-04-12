@@ -74,6 +74,7 @@ page 60119 "Unit Registration"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Semester field.';
+                    Editable = false;
 
                 }
                 field("Academic Year Code"; Rec."Academic Year Code")
@@ -88,10 +89,31 @@ page 60119 "Unit Registration"
                     Editable = false;
                     ToolTip = 'Specifies the value of the Academic Year Description field.';
                 }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Status field.';
+                    Editable = false;
+                }
                 field("Register For Exams"; Rec."Register For Exams")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Register For Exams field.';
+                    Visible = false;
+                }
+                field("Total Unit Selected"; Rec."Total Unit Selected")
+                {
+                    ApplicationArea = All;
+                    Editable = false
+                    ;
+                    ToolTip = 'Specifies the value of the Total Unit Selected field.';
+                }
+                field("Unit Status"; Rec."Unit Status")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Specifies the value of the Status Of the Units field.';
+                    visible = false;
+
                 }
             }
             part(Lines; "Units Registration")
@@ -105,27 +127,82 @@ page 60119 "Unit Registration"
     {
         area("Processing")
         {
-            action("Suggest Units to Register")
+            group(Approvals)
             {
-                trigger OnAction()
+                action("Send Approval Request")
+                {
+                    Image = SendApprovalRequest;
+                    Promoted = true;
+                    PromotedCategory = Category6;
+                    Enabled = Rec.Status = Rec.Status::Open;
+                    PromotedOnly = true;
+                    ApplicationArea = All;
+                    trigger OnAction()
 
-                begin
-                    UnitReg.Reset();
-                    UnitReg.SetRange("No.", Rec."No.");
+                    begin
+                        Rec.CalcFields("Total Unit Selected");
+                        if Rec."Total Unit Selected" > 0 then begin
+                            IF ApprovalsMgmtCut.CheckUnitsRegApprovalsWorkflowEnabled(Rec) then
+                                ApprovalsMgmtCut.OnSendUnitsRegForApproval(Rec);
+                        end else
+                            Error('Please Select Atleast one Unit to Register!!!');
+                    end;
+                }
+                action("Cancel Approval Request")
+                {
+                    Enabled = CanCancelApprovalForRecord OR CanCancelApprovalForFlow;
+                    Image = CancelApprovalRequest;
+                    PromotedCategory = Category6;
+                    Promoted = true;
+                    PromotedOnly = true;
+                    ApplicationArea = All;
+                    trigger OnAction()
+                    begin
+                        ApprovalsMgmtCut.OnCancelUnitRegApprovalRequest(Rec);
+                    end;
+                }
+                action(ApprovalEntries)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approvals';
+                    Image = Approvals;
+                    Promoted = true;
+                    PromotedCategory = Category5;
+                    PromotedIsBig = true;
 
-                    if UnitReg.FindFirst() then
-                        Report.Run(Report::"Suggest Units Registration", false, false, UnitReg);
-                end;
+                    trigger OnAction()
+                    begin
+                        ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                    end;
+                }
             }
             group(Register)
             {
+                action("Suggest Units to Register")
+                {
+                    Image = Action;
+                    Promoted = true;
+                    PromotedCategory = process;
+                    PromotedOnly = true;
+                    ApplicationArea = All;
+                    trigger OnAction()
+
+                    begin
+                        UnitReg.Reset();
+                        UnitReg.SetRange("No.", Rec."No.");
+
+                        if UnitReg.FindFirst() then
+                            Report.Run(Report::"Suggest Units Registration", false, false, UnitReg);
+                    end;
+                }
                 action("Register For Units ")
                 {
                     Image = Action;
                     Promoted = true;
-                    PromotedCategory = Process;
+                    PromotedCategory = process;
                     PromotedOnly = true;
                     ApplicationArea = All;
+                    Visible = false;
                     trigger OnAction()
                     begin
                         ReleaseDoc.UnitRegRelease(Rec);
@@ -138,6 +215,7 @@ page 60119 "Unit Registration"
                     PromotedCategory = Process;
                     PromotedOnly = true;
                     ApplicationArea = All;
+                    Visible = false;
                     trigger OnAction()
                     begin
                         ReleaseDoc.UnitRegRelease(Rec);
@@ -145,32 +223,53 @@ page 60119 "Unit Registration"
                 }
 
             }
-        }
-        area(Navigation)
-        {
-            action(Report)
+            group(Reports)
             {
-                ApplicationArea = All;
-                Caption = 'Unit Registration Report';
-                Image = Entry;
-                Promoted = true;
-                PromotedCategory = Process;
-                trigger OnAction()
-                begin
-                    UnitRegistration.Reset();
-                    UnitRegistration.SetRange("No.", Rec."No.");
-                    UnitRegistration.SetRange("Student No.", Rec."Student No.");
-                    UnitRegistration.SetFilter("Student Name", '%1', Rec."Student Name");
-                    UnitRegReport.SetTableView(UnitRegistration);
-                    UnitRegReport.Run();
-                end;
 
+                action(Report)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Unit Registration Report';
+                    Image = Entry;
+                    Promoted = true;
+                    PromotedCategory = Report;
+                    trigger OnAction()
+                    begin
+                        UnitRegistration.Reset();
+                        UnitRegistration.SetRange("No.", Rec."No.");
+                        UnitRegistration.SetRange("Student No.", Rec."Student No.");
+                        UnitRegistration.SetFilter("Student Name", '%1', Rec."Student Name");
+                        UnitRegReport.SetTableView(UnitRegistration);
+                        UnitRegReport.Run();
+                    end;
+
+
+                }
             }
         }
+
     }
+    trigger OnAfterGetRecord()
+
+    begin
+        OpenApprovalEntriesExistForCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(rec.RecordId);
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(rec.RECORDID);
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(rec.RECORDID);
+        WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
+    end;
+
     var
         UnitReg: Record "Unit Registration";
         UnitRegReport: Report "Unit Registration Report";
         UnitRegistration: Record "Unit Registration";
         ReleaseDoc: Codeunit "Document Release";
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        WorkflowWebhookMgt: Codeunit 1543;
+        ApprovalsMgmtCut: Codeunit "Approval Management CUEXT";
+        OpenApprovalEntriesExistForCurrUser: Boolean;
+        OpenApprovalEntriesExist: Boolean;
+        CanCancelApprovalForRecord: Boolean;
+        CanCancelApprovalForFlow: Boolean;
+        CanRequestApprovalForFlow: Boolean;
+        EnabledApprovalWorkflowsExist: Boolean;
 }

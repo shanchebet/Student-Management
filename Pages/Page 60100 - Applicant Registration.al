@@ -252,13 +252,14 @@ page 60100 "Applicant Registration"
                     end;
                 }
             }
-            action(Email)
+            action(Emails)
             {
                 ApplicationArea = all;
                 PromotedIsBig = true;
                 PromotedCategory = Process;
                 Promoted = true;
                 Image = SendMail;
+                Visible = false;
                 trigger OnAction()
                 var
                     myInt: Integer;

@@ -7,6 +7,11 @@ codeunit 60100 "Workflow Event Handling CUExt"
         ApplicantRegSendForApprovalEventDescTxt: Label 'Approval of Applicant registration is requested';
         ApplicantRegApprovalRequestCancelEventDescTxt: Label 'Approval Request for Applicant Registration has been cancel';
         ApplicantRegReleasedEventDescTxt: Label 'Applicant Registration has been released';
+        //variables used for Unit Registration
+        UnitRegSendForApprovalEventDescTxt: Label 'Approval of Units registration is requested';
+        UnitRegApprovalRequestCancelEventDescTxt: Label 'Approval Request for Units Registration has been cancel';
+        UnitRegReleasedEventDescTxt: Label 'Units Registration has been released';
+
         //Variables used for student Invoices.
         InvoiceSendForApprovalEventDescTxt: Label 'Approval of Invoice is requested';
         InvoiceApprovalRequestCancelEventDescTxt: Label 'Approval Request for Invoices has been cancel';
@@ -37,6 +42,26 @@ codeunit 60100 "Workflow Event Handling CUExt"
     procedure RunWorkflowOnRejectedApplicantRegCode(): Code[128]
     begin
         exit(UpperCase('RunWorkflowOnRejectedApplicantRegCode'));
+    end;
+    //Functions For Unit Registratiion
+    procedure RunWorkflowOnSendUnitsForApprovalCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnSendUnitsForApprovalCode'))
+    end;
+
+    procedure RunWorkflowOnCancelUnitsForApprovalRequestCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnCancelUnitsForApprovalRequestCode'));
+    end;
+
+    procedure RunWorkflowOnAfterReleaseUnitsCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnAfterReleaseUnitsCode'));
+    end;
+
+    procedure RunWorkflowOnRejectedUnitsCode(): Code[128]
+    begin
+        exit(UpperCase('RunWorkflowOnRejectedInvoiceCode'));
     end;
     //FUNCTIONS FOR student Invoice
     procedure RunWorkflowOnSendInvoiceForApprovalCode(): Code[128]
@@ -96,6 +121,10 @@ codeunit 60100 "Workflow Event Handling CUExt"
         WorkflowEvent.AddEventToLibrary(RunWorkflowOnSendReceiptForApprovalCode, Database::"Receipt Header", ReceiptSendForApprovalEventDescTxt, 0, false);
         WorkflowEvent.AddEventToLibrary(RunWorkflowOnCancelReceiptForApprovalRequestCode, Database::"Receipt Header", ReceiptApprovalRequestCancelEventDescTxt, 0, false);
         WorkflowEvent.AddEventToLibrary(RunWorkflowOnAfterReleaseReceiptCode, Database::"Receipt Header", ReceiptReleasedEventDescTxt, 0, false);
+        //Unit Registration Process
+        WorkflowEvent.AddEventToLibrary(RunWorkflowOnSendUnitsForApprovalCode, Database::"Unit Registration", UnitRegSendForApprovalEventDescTxt, 0, false);
+        WorkflowEvent.AddEventToLibrary(RunWorkflowOnCancelUnitsForApprovalRequestCode, Database::"Unit Registration", UnitRegApprovalRequestCancelEventDescTxt, 0, false);
+        WorkflowEvent.AddEventToLibrary(RunWorkflowOnAfterReleaseUnitsCode, Database::"Unit Registration", UnitRegReleasedEventDescTxt, 0, false);
 
     end;
 
@@ -116,6 +145,7 @@ codeunit 60100 "Workflow Event Handling CUExt"
                     WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendApplicantRegForApprovalCode);
                     WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendInvoiceForApprovalCode);
                     WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendReceiptForApprovalCode);
+                    WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnApproveApprovalRequestCode, RunWorkflowOnSendUnitsForApprovalCode);
 
                 end;
 
@@ -127,6 +157,7 @@ codeunit 60100 "Workflow Event Handling CUExt"
                     WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendApplicantRegForApprovalCode);
                     WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendInvoiceForApprovalCode);
                     WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendReceiptForApprovalCode);
+                    WorkflowEvent.AddEventPredecessor(WorkflowEvent.RunWorkflowOnDelegateApprovalRequestCode, RunWorkflowOnSendUnitsForApprovalCode);
 
                 end;
             //Invoincing Process
@@ -141,6 +172,12 @@ codeunit 60100 "Workflow Event Handling CUExt"
 
             RunWorkflowOnRejectedReceiptCode:
                 WorkflowEvent.AddEventPredecessor(RunWorkflowOnRejectedReceiptCode, RunWorkflowOnSendReceiptForApprovalCode);
+            //Unit Registration Process
+            RunWorkflowOnCancelUnitsForApprovalRequestCode:
+                WorkflowEvent.AddEventPredecessor(RunWorkflowOnCancelUnitsForApprovalRequestCode, RunWorkflowOnSendUnitsForApprovalCode);
+            RunWorkflowOnRejectedUnitsCode:
+                WorkflowEvent.AddEventPredecessor(RunWorkflowOnRejectedUnitsCode, RunWorkflowOnSendUnitsForApprovalCode);
+
 
         end;
     end;
@@ -157,7 +194,6 @@ codeunit 60100 "Workflow Event Handling CUExt"
     local procedure RunWorkflowOnCancelApplicantRegForApproval(var ApplicantReg: Record "Applicant Registration")
     var
         ApplicantRec: Record "Applicant Registration";
-    // UnitReg: Record "Unit Registration Line";
     begin
         WorkflowManagement.HandleEvent(RunWorkflowOnCancelApplicantRegForApprovalRequestCode, ApplicantReg);
         ApplicantRec.Reset();
@@ -167,7 +203,29 @@ codeunit 60100 "Workflow Event Handling CUExt"
             ApplicantRec.Modify();
         end;
     end;
+    //EventSubscriber For Units Registration
 
+    [EventSubscriber(ObjectType::Codeunit::Codeunit, 60101, 'OnSendUnitsRegForApproval', '', false, false)]
+    local procedure RunWorkflowOnSendUnitsRegForApproval(var UnitReg: Record "Unit Registration")
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnSendUnitsForApprovalCode, UnitReg);
+    end;
+
+
+    [EventSubscriber(ObjectType::Codeunit::Codeunit, 60101, 'OnCancelUnitRegApprovalRequest', '', false, false)]
+    local procedure RunWorkflowOnCancelUnitsRegForApproval(var UnitReg: Record "Unit Registration")
+    var
+        UnitsRec: Record "Unit Registration";
+    // UnitReg: Record "Unit Registration Line";
+    begin
+        WorkflowManagement.HandleEvent(RunWorkflowOnCancelUnitsForApprovalRequestCode, UnitReg);
+        UnitsRec.Reset();
+        UnitsRec.SetRange("No.", UnitReg."No.");
+        if UnitsRec.FindFirst then begin
+            UnitsRec.Status := UnitsRec.Status::OPen;
+            UnitsRec.Modify();
+        end;
+    end;
     //Eventsubscriber for Student Invoice
     [EventSubscriber(ObjectType::Codeunit::Codeunit, 60101, 'OnSendInvoiceForApproval', '', false, false)]
     local procedure RunWorkflowOnSendInvoiceForApproval(VAR Inv: Record "Student Invoice")
@@ -224,6 +282,22 @@ codeunit 60100 "Workflow Event Handling CUExt"
         if ApplicantRec.FindFirst then begin
             ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::Rejected;
             ApplicantRec.Modify();
+
+        end;
+
+    end;
+    //rejecting Unit Registration
+    [EventSubscriber(ObjectType::Codeunit::Codeunit, 1535, 'OnRejectApprovalRequest', '', false, false)]
+    procedure RunWorkflowOnRejectUnitRegForApproval(VAR ApprovalEntry: Record "Approval Entry")
+    var
+        UnitRec: Record "Unit Registration";
+    begin
+        WorkflowManagement.HandleEventOnKnownWorkflowInstance(RunWorkflowOnRejectedUnitsCode, ApprovalEntry, ApprovalEntry."Workflow Step Instance ID");
+        UnitRec.RESET();
+        UnitRec.SetRange("No.", ApprovalEntry."Document No.");
+        if UnitRec.FindFirst then begin
+            UnitRec.Status := UnitRec.Status::Rejected;
+            UnitRec.Modify();
 
         end;
 

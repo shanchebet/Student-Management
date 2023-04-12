@@ -6,16 +6,16 @@ codeunit 60103 "Document Release"
 
     procedure UnitRegRelease(var UnitReg: Record "Unit Registration")
     var
-        MExits: Record "Unit Registration Line";
+        UnitRecLines: Record "Unit Registration Line";
     begin
         with UnitReg do begin
-            MExits.SetRange("Document No.", "No.");
-            MExits.SetRange(Select, true);
-            if MExits.FindSet() then begin
+            UnitRecLines.SetRange("Document No.", "No.");
+            UnitRecLines.SetRange(Select, true);
+            if UnitRecLines.FindSet() then begin
                 repeat
-                    MExits."Unit Status" := MExits."Unit Status"::Registered;
-                    MExits.Modify();
-                until MExits.Next() = 0;
+                    UnitRecLines."Unit Status" := UnitRecLines."Unit Status"::Registered;
+                    UnitRecLines.Modify();
+                until UnitRecLines.Next() = 0;
             end;
         end;
     end;
@@ -46,7 +46,7 @@ codeunit 60103 "Document Release"
     //Procedure used to release an invoice
     procedure InvoiceRelease(var InvRec: Record "Student Invoice")
     var
-        MEXists: Record "Student Invoice";
+        StudInvc: Record "Student Invoice";
     begin
         InvRec.Status := InvRec.Status::Released;
         InvRec.Modify();
@@ -57,10 +57,30 @@ codeunit 60103 "Document Release"
         InvRec.Status := InvRec.Status::OPen;
         InvRec.Modify();
     end;
+    //procedure used to Release Units
+    procedure UnitsRelease(var UnitsRec: Record "Unit Registration")
+    var
+        UnitReg: Record "Unit Registration";
+    begin
+        UnitReg.Reset();
+        UnitReg.SetRange("No.", UnitsRec."No.");
+        if UnitReg.FindFirst() then begin
+            UnitsRec.Status := UnitsRec.Status::Released;
+            UnitsRec.Modify();
+            UnitRegRelease(UnitsRec);
+        end;
+    end;
+
+    procedure UnitsReopen(var UnitsRec: Record "Unit Registration")
+    begin
+        UnitsRec.Status := UnitsRec.Status::OPen;
+        UnitsRec.Modify();
+    end;
+
     //procedure Used to Release Receipts
     procedure ReceiptRelease(Var Receipt: Record "Receipt Header")
     var
-        MEXists: Record "Receipt Header";
+        RcptHdr: Record "Receipt Header";
     begin
         Receipt.Status := Receipt.Status::Released;
         Receipt.Modify();
@@ -75,17 +95,16 @@ codeunit 60103 "Document Release"
     //Procedure for Applicant Registration
     procedure ApplicantRegRelease(var ApplicantRec: Record "Applicant Registration")
     var
-        MExits: Record "Applicant Registration";
+        AppReg: Record "Applicant Registration";
         StudMgt: Codeunit "Student Management";
     begin
-        MExits.Reset();
-        MExits.SetRange("Application No.", ApplicantRec."Application No.");
-        if MExits.FindFirst() then begin
+        AppReg.Reset();
+        AppReg.SetRange("Application No.", ApplicantRec."Application No.");
+        if AppReg.FindFirst() then begin
             ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::Released;
             ApplicantRec.Modify();
-            //CreateApplicant(ApplicantRec);
             CreateApplicant(ApplicantRec);
-            //StudMgt.EmailAdmissionLetter(ApplicantRec);
+            StudMgt.EmailAdmissionLetter(ApplicantRec);
         end;
     end;
 

@@ -16,6 +16,19 @@ codeunit 60101 "Approval Management CUEXT"
     begin
         EXIT(WorkflowManagement.CanExecuteWorkflow(ApplicantReg, WorkflowEventHandling.RunWorkflowOnSendApplicantRegForApprovalCode));
     end;
+    //Function For Checking if the Workflow for Units Registration Is Enabled.
+    procedure CheckUnitsRegApprovalsWorkflowEnabled(VAR UnitReg: Record "Unit Registration"): Boolean
+    begin
+        IF NOT IsUnitsRegApprovalsWorkflowEnabled(UnitReg) THEN
+            ERROR(NoWorkflowEnabledErr);
+        EXIT(TRUE);
+    end;
+
+    procedure IsUnitsRegApprovalsWorkflowEnabled(VAR UnitReg: Record "Unit Registration"): Boolean
+    begin
+        EXIT(WorkflowManagement.CanExecuteWorkflow(UnitReg, WorkflowEventHandling.RunWorkflowOnSendUnitsForApprovalCode));
+    end;
+
 
     //Fuction for Checking if the workflow is enabled for Invoicing
     procedure CheckInvoiceApprovalsWorkflowEnabled(VAR Inv: Record "Student Invoice"): Boolean
@@ -55,6 +68,18 @@ codeunit 60101 "Approval Management CUEXT"
     begin
 
     end;
+    // Integration For Unit Registration
+    [IntegrationEvent(false, false)]
+    procedure OnSendUnitsRegForApproval(VAR UnitReg: Record "Unit Registration")
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnCancelUnitRegApprovalRequest(VAR UnitReg: Record "Unit Registration")
+    begin
+
+    end;
     //Integration for invoicing
     [IntegrationEvent(false, false)]
     procedure OnSendInvoiceForApproval(VAR Inv: Record "Student Invoice")
@@ -89,6 +114,7 @@ codeunit 60101 "Approval Management CUEXT"
         NumberSeries: Codeunit NoSeriesManagement;
         Inv: Record "Student Invoice";
         Receipt: Record "Receipt Header";
+        UnitReg: Record "Unit Registration";
         ApprovalAmnt: Decimal;
     begin
         CASE RecRef.NUMBER OF
@@ -100,6 +126,11 @@ codeunit 60101 "Approval Management CUEXT"
                     ApprovalEntryArgument."Document No." := ApplicantReg."Application No.";
 
                 END;
+            Database::"Unit Registration":
+                begin
+                    RecRef.SetTable(UnitReg);
+                    ApprovalEntryArgument."Document No." := UnitReg."No.";
+                end;
 
             Database::"Student Invoice":
                 begin
@@ -130,6 +161,7 @@ codeunit 60101 "Approval Management CUEXT"
         NumberSeries: Codeunit NoSeriesManagement;
         Inv: Record "Student Invoice";
         Receipt: Record "Receipt Header";
+        UnitReg: Record "Unit Registration";
     begin
 
         CASE RecRef.NUMBER OF
@@ -142,6 +174,14 @@ codeunit 60101 "Approval Management CUEXT"
                     Variant := ApplicantReg;
                     IsHandled := true;
                 END;
+            Database::"Unit Registration":
+                begin
+                    RecRef.SetTable(UnitReg);
+                    UnitReg.Validate(Status, UnitReg.Status::Pending);
+                    UnitReg.Modify(true);
+                    Variant := UnitReg;
+                    IsHandled := true;
+                end;
 
             Database::"Student Invoice":
                 begin

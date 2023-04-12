@@ -13,6 +13,8 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SetStatusToPendingApprovalCode, WorkflowEventHandling.RunWorkflowOnSendApplicantRegForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SetStatusToPendingApprovalCode, WorkflowEventHandling.RunWorkflowOnSendInvoiceForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SetStatusToPendingApprovalCode, WorkflowEventHandling.RunWorkflowOnSendReceiptForApprovalCode);
+                    WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SetStatusToPendingApprovalCode, WorkflowEventHandling.RunWorkflowOnSendUnitsForApprovalCode);
+
                 END;
             WorkFlowResponse.CreateApprovalRequestsCode:
                 BEGIN
@@ -20,6 +22,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CreateApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnSendApplicantRegForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CreateApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnSendInvoiceForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CreateApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnSendReceiptForApprovalCode);
+                    WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CreateApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnSendUnitsForApprovalCode);
 
                 END;
             WorkFlowResponse.SendApprovalRequestForApprovalCode:
@@ -28,6 +31,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SendApprovalRequestForApprovalCode, WorkflowEventHandling.RunWorkflowOnSendApplicantRegForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SendApprovalRequestForApprovalCode, WorkflowEventHandling.RunWorkflowOnSendInvoiceForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SendApprovalRequestForApprovalCode, WorkflowEventHandling.RunWorkflowOnSendReceiptForApprovalCode);
+                    WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.SendApprovalRequestForApprovalCode, WorkflowEventHandling.RunWorkflowOnSendUnitsForApprovalCode);
 
                 END;
             WorkFlowResponse.OpenDocumentCode:
@@ -36,6 +40,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnRejectedApplicantRegCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnSendInvoiceForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnSendReceiptForApprovalCode);
+                    WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.OpenDocumentCode, WorkflowEventHandling.RunWorkflowOnSendUnitsForApprovalCode);
                 END;
 
             WorkFlowResponse.CancelAllApprovalRequestsCode:
@@ -44,6 +49,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CancelAllApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnCancelApplicantRegForApprovalRequestCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CancelAllApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnSendInvoiceForApprovalCode);
                     WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CancelAllApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnSendReceiptForApprovalCode);
+                    WorkFlowResponse.AddResponsePredecessor(WorkFlowResponse.CancelAllApprovalRequestsCode, WorkflowEventHandling.RunWorkflowOnSendUnitsForApprovalCode);
                 END;
         end;
 
@@ -58,6 +64,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
         Receipt: Record "Receipt Header";
         VarVariant: Variant;
         StudMgt: Codeunit "Student Management";
+        UnitRec: Record "Unit Registration";
     begin
         VarVariant := RecRef;
         CASE RecRef.NUMBER OF
@@ -66,6 +73,12 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     ApplicantReg.SetView(RecRef.GetView());
                     Handled := true;
                     ReleaseDoc.ApplicantRegRelease(VarVariant);
+                end;
+            Database::"Unit Registration":
+                begin
+                    UnitRec.SetView(RecRef.GetView());
+                    Handled := true;
+                    ReleaseDoc.UnitsRelease(VarVariant);
                 end;
 
             Database::"Student Invoice":
@@ -92,6 +105,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
         Inv: Record "Student Invoice";
         Receipt: Record "Receipt Header";
         VarVariant: Variant;
+        UnitRec: Record "Unit Registration";
     begin
         VarVariant := RecRef;
         CASE RecRef.NUMBER OF
@@ -101,6 +115,12 @@ codeunit 60102 "Workflow Event Response CUEXT"
                     Handled := true;
                     ReleaseDoc.ApplicantRegReopen(VarVariant);
 
+                end;
+            Database::"Unit Registration":
+                begin
+                    UnitRec.SetView(RecRef.GetView());
+                    Handled := true;
+                    ReleaseDoc.UnitsReopen(VarVariant);
                 end;
 
             Database::"Student Invoice":

@@ -146,15 +146,38 @@ page 60106 "Student Management RoleCentre"
                     Caption = 'Unit Matrix Setup';
                     RunObject = page "Unit Matrix";
                 }
-                action("Units Registration")
-                {
-                    ApplicationArea = basic, Suite;
-                    RunObject = page "Unit Registration List";
-                }
                 action("Exam Entries")
                 {
                     ApplicationArea = all;
                     RunObject = page "Exam Entries";
+                }
+                group("Unit registration")
+                {
+                    // action("Units Registration")
+                    // {
+                    //     ApplicationArea = basic, Suite;
+                    //     RunObject = page "Unit Registration List";
+                    // }
+                    action("Open Units Registration")
+                    {
+                        ApplicationArea = basic, Suite;
+                        RunObject = page "open Unit Registration";
+                    }
+                    action("Pending Units Registration")
+                    {
+                        ApplicationArea = basic, Suite;
+                        RunObject = page "Pending Unit Registration";
+                    }
+                    action("Rejected Units Registration")
+                    {
+                        ApplicationArea = basic, Suite;
+                        RunObject = page "Pending Unit Registration";
+                    }
+                    action("Releaased Units Registration")
+                    {
+                        ApplicationArea = basic, Suite;
+                        RunObject = page "Released Unit Registration";
+                    }
                 }
 
             }
