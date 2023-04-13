@@ -5,7 +5,7 @@ page 60100 "Applicant Registration"
     SourceTable = "Applicant Registration";
     PromotedActionCategories = 'New,Process,Report, New Document,Approve,Request Approval';
     UsageCategory = Administration;
-    ApplicationArea = All;
+    ApplicationArea = all;
 
     layout
     {
@@ -335,8 +335,6 @@ page 60100 "Applicant Registration"
         CanRequestApprovalForFlow: Boolean;
         ReleaseDoc: Codeunit "Document Release";
         EnabledApprovalWorkflowsExist: Boolean;
-
-        fieldeditable: Boolean;
         stud: Codeunit "Student Management";
         IsEditable: Boolean;
 }

@@ -13,6 +13,7 @@ page 60119 "Unit Registration"
         {
             group(General)
             {
+                Editable = IsEditable;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -118,6 +119,7 @@ page 60119 "Unit Registration"
             }
             part(Lines; "Units Registration")
             {
+                Editable = IsEditable;
                 ApplicationArea = All;
                 SubPageLink = "Document No." = field("No.");
             }
@@ -258,8 +260,31 @@ page 60119 "Unit Registration"
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
     end;
 
+    trigger OnOpenPage()
+    begin
+
+        SetPageControl();
+        CurrPage.Update();
+    end;
+
+    procedure SetPageControl()
+    begin
+        IsEditable := true;
+        case Rec.Status of
+            Rec.Status::" ",
+            Rec.Status::Pending,
+            Rec.Status::Rejected,
+        Rec.Status::Canceled,
+        Rec.Status::Released:
+                begin
+                    IsEditable := false;
+                end;
+        end;
+    end;
+
     var
         UnitReg: Record "Unit Registration";
+        IsEditable: Boolean;
         UnitRegReport: Report "Unit Registration Report";
         UnitRegistration: Record "Unit Registration";
         ReleaseDoc: Codeunit "Document Release";

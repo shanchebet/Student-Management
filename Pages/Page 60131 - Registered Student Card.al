@@ -460,7 +460,6 @@ page 60131 "Registered Student Card"
                                 Error('Please Clear Your Fee Balance for you to Proceed to print Exam Card!!!');
                         end;
                     end;
-
                 }
             }
         }
