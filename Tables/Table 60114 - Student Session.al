@@ -64,13 +64,14 @@ table 60114 "Student Session"
                     "Academic Year Code" := Sem." Academic Year Code";
                     Validate("Academic Year Code");
                     studentSession.Reset();
-                    studentSession.SetRange("Semester Code", Rec."Semester Code");
-                    studentSession.SetRange("Academic Year Code", Rec."Academic Year Code");
+                    studentSession.SetRange("Student No.", "Student No.");
+                    studentSession.SetRange("Semester Code", Sem."Semester Code");
+                    studentSession.SetRange("Academic Year Code", Sem."Academic Year Description");
                     if not studentSession.FindFirst() then begin
+                        Rec."Academic Year Code" := Sem." Academic Year Code";
+                        Rec."Academic Year Description" := Sem."Academic Year Description";
                         Rec."Semester Code" := Sem."Semester Code";
                         Rec."Semester Description" := Sem."Semester Description";
-                        Rec."Academic Year Code" := "Academic Year Code";
-                        Rec."Academic Year Description" := "Academic Year Description";
                     end else
                         Error('The record already Exists for semseter %1 and Semester %2', studentSession."Semester Description", studentSession."Academic Year Code");
                 end;

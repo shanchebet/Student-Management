@@ -6,7 +6,7 @@ page 60102 "Applicant Registration List"
     SourceTable = "Applicant Registration";
     UsageCategory = Lists;
     CardPageId = "Applicant Registration";
-    //SourceTableView = where("Approval Status" = filter(<> Released));
+    SourceTableView = where("Approval Status" = filter(<> open));
     layout
     {
         area(Content)

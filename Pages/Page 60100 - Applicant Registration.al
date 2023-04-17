@@ -76,6 +76,7 @@ page 60100 "Applicant Registration"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Marital Status field.';
+                    Visible = false;
                 }
                 field("Approval Status"; Rec."Approval Status")
                 {

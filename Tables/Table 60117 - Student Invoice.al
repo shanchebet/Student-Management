@@ -37,6 +37,11 @@ table 60117 "Student Invoice"
         field(4; "Posting Date"; Date)
         {
             Caption = 'Posting Date';
+            trigger OnValidate()
+            begin
+                if "Posting Date" <> Today then
+                    Error('Posting date cannot be greater than Today');
+            end;
         }
         field(5; "Level Of Study"; Text[100])
         {

@@ -291,6 +291,7 @@ table 60100 "Applicant Registration"
             Rec."Approval Status" := Rec."Approval Status"::Open;
             Rec."Customer Type" := Rec."Customer Type"::Student;
         end;
+
     end;
 
     var

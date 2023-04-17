@@ -244,12 +244,9 @@ page 60119 "Unit Registration"
                         UnitRegReport.SetTableView(UnitRegistration);
                         UnitRegReport.Run();
                     end;
-
-
                 }
             }
         }
-
     }
     trigger OnAfterGetRecord()
 

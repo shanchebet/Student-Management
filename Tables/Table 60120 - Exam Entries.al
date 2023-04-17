@@ -29,8 +29,8 @@ table 60120 "Exam Entries"
                 StdMgtSetup.Get();
                 Cust.Get("Student No.");
                 Cust.CalcFields(Balance);
-                if Cust.Balance > StdMgtSetup."Minimum Fee Balance" then
-                    Error('Fee Balance Should be less or Equal to %1', StdMgtSetup."Minimum Fee Balance");
+                if Cust.Balance > StdMgtSetup."Maximum Fee Balance" then
+                    Error('Fee Balance Should be less or Equal to %1', StdMgtSetup."Maximum Fee Balance");
             end;
         }
         field(3; "Student Name"; Text[100])
@@ -63,10 +63,15 @@ table 60120 "Exam Entries"
         {
             DataClassification = CustomerContent;
             trigger OnValidate()
+            var
+                examlines: Record "Exam Entries Lines";
             begin
                 UnitReglines.Reset();
                 UnitReglines.SetRange("Document No.", Rec."Unit Reg No.");
                 UnitReglines.SetFilter("Unit Status", '=%1', UnitReglines."Unit Status"::Registered);
+                examlines.Reset();
+                examlines.SetRange("Unit Code", examlines."Unit Code");
+                examlines.SetRange("Unit Description", examlines."Unit Description");
                 if UnitReglines.FindSet() then begin
                     repeat
                         ExEntrieLine.Init();

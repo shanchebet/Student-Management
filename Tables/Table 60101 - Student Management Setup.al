@@ -153,7 +153,7 @@ table 60101 "Student Management Setup"
             Caption = 'Default Student Posting Group';
             TableRelation = "Customer Posting Group";
         }
-        field(22; "Minimum Fee Balance"; Decimal)
+        field(22; "Maximum Fee Balance"; Decimal)
         {
             DataClassification = ToBeClassified;
             MinValue = 1;

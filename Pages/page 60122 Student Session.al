@@ -40,6 +40,7 @@ page 60122 "Student Session"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Level Of Study field.';
+                    Editable = false;
                 }
                 field("Course Of Study"; Rec."Course Of Study")
                 {

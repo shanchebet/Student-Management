@@ -63,6 +63,7 @@ page 60133 "Pending Approval Invoice List"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Posting Date field.';
+
                 }
                 field(Status; Rec.Status)
                 {

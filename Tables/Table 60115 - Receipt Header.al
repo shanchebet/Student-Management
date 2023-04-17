@@ -33,6 +33,12 @@ table 60115 "Receipt Header"
             DataClassification = CustomerContent;
             Caption = 'Posting Date';
 
+            trigger OnValidate()
+            begin
+                if "Posting Date" > Today then
+                    Error('Posting date cannot be greater than Today');
+            end;
+
         }
         field(4; "Semester Code"; Code[30])
         {

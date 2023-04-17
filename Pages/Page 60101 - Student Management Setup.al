@@ -108,7 +108,7 @@ page 60101 "Student Management Setup"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Fin Nos field.';
                 }
-                field("Minimum Fee Balance"; Rec."Minimum Fee Balance")
+                field("Minimum Fee Balance"; Rec."Maximum Fee Balance")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Minimum Fee Balance field.';
