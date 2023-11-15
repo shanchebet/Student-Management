@@ -23,6 +23,7 @@ page 60100 "Applicant Registration"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Application No field.';
+                    Editable = false;
 
                     trigger OnAssistEdit()
                     begin
@@ -278,35 +279,16 @@ page 60100 "Applicant Registration"
         OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(rec.RECORDID);
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(rec.RECORDID);
         WorkflowWebhookMgt.GetCanRequestAndCanCancel(rec.RECORDID, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
-        //Clear(Rec);
+
     end;
 
     trigger OnOpenPage()
     begin
 
         SetPageControl();
-        //Clear(Rec);
         CurrPage.Update();
-
-        // Rec.RESET;
-        // if not Rec.GET then begin
-        //     Rec.INIT;
-        //     Rec.INSERT;
-        // end;
-
     end;
 
-    // trigger OnNewRecord(BelowxRec: Boolean)
-    // begin
-    //     SetPageControl();
-    //     CurrPage.Update();
-    // end;
-
-    // trigger OnInsertRecord(BelowxRec: Boolean): Boolean
-    // begin
-    //     SetPageControl();
-    //     CurrPage.Update();
-    // end;
 
     procedure SetPageControl()
     begin

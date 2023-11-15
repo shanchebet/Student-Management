@@ -167,7 +167,6 @@ page 60124 "Receipt Header"
                     PromotedCategory = Category6;
                     PromotedOnly = true;
                     ApplicationArea = All;
-                    //Enabled = not OpenApprovalEntriesExist;
                     Enabled = Rec.Status = Rec.Status::open;
                     trigger OnAction()
                     begin
@@ -203,16 +202,11 @@ page 60124 "Receipt Header"
                     end;
                 }
             }
-
-
-
-
         }
     }
     trigger OnAfterGetRecord()
 
     begin
-
         OpenApprovalEntriesExistForCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(rec.RecordId);
         OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(rec.RECORDID);
         CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(rec.RECORDID);

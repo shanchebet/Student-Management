@@ -80,11 +80,11 @@ table 60100 "Applicant Registration"
                     Rec.Age := Round((Today - Rec.DOB) / MSMSStudentSetup."No. of Days In A Year", 1, '<');
 
                     if Rec.Age < MSMSStudentSetup."Minimum Age" then begin
-                        Error('You do not qualify for this');
+                        Error('You dont meet the minimum age requirements');
 
                     end else
                         if Rec.Age > MSMSStudentSetup."Maximum Age" then begin
-                            Error('Your Age is More than Expected');
+                            Error('You dont meet the maximum age requirements');
                         end else
                             exit;
                 end;

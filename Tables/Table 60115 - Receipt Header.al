@@ -35,7 +35,7 @@ table 60115 "Receipt Header"
 
             trigger OnValidate()
             begin
-                if "Posting Date" > Today then
+                if "Posting Date" <> Today then
                     Error('Posting date cannot be greater than Today');
             end;
 

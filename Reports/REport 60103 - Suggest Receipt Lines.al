@@ -21,7 +21,7 @@ report 60103 "Suggest Receipt Lines"
                         CustLedger.CALCFIELDS("Remaining Amount");
                         // Insert into Receipt Header lines Table
                         if ReceiptLines."Applies-to Doc. No." <> CustLedger."Document No." then begin
-                            LineNo := LineNo + 10000;
+                            LineNo := LineNo + 10000;//Set The Starting Value of Line No and Increment as the Record is generated
                             ReceiptLines.Init();
                             ReceiptLines."Document No" := ReceiptHeader."No.";
                             ReceiptLines."Line No" := LineNo;

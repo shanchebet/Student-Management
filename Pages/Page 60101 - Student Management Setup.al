@@ -6,8 +6,7 @@ page 60101 "Student Management Setup"
     UsageCategory = Administration;
     DeleteAllowed = false;
     InsertAllowed = false;
-    ApplicationArea = All;
-
+   
     layout
     {
         area(Content)
@@ -108,10 +107,10 @@ page 60101 "Student Management Setup"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Fin Nos field.';
                 }
-                field("Minimum Fee Balance"; Rec."Maximum Fee Balance")
+                field("Maximum Fee Balance"; Rec."Maximum Fee Balance")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Minimum Fee Balance field.';
+                    ToolTip = 'Specifies the value of the maximum Fee Balance field.';
                 }
 
             }

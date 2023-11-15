@@ -97,50 +97,19 @@ table 60112 "Unit Registration"
             DataClassification = CustomerContent;
             Caption = 'Academic Year Code';
             TableRelation = "Academic Year";
+            trigger OnValidate()
+            var
+                AC: Record "Academic Year";
+            begin
+                if AC.Get("Academic Year Code") then
+                    "Academic Year Description" := AC."Academic Year Description";
+            end;
         }
         field(12; Semester; Code[30])
         {
             DataClassification = CustomerContent;
             TableRelation = Semester;
-            // trigger OnValidate()
-            // var
-            //     SemRec: Record Semester;
-            // begin
-            //     SemRec.Reset();
-            //     SemRec.SetRange("Semester Code", Semester);
-            //     if SemRec.FindFirst() then begin
-            //         "Academic Year Code" := SemRec." Academic Year Code";
-            //         "Academic Year Description" := SemRec."Academic Year Description";
-            //     end;
-            // end;
 
-            // trigger OnValidate()
-            // var
-            //     SemRec: Record Semester;
-            // begin
-
-            //     //Clear Unit Registration Lines
-            //     StudMgt.ClearUnitRegistrationLines(Rec);
-            //     //Insert Into the Unit Registration lines from Unit Matrix Table(Record)
-
-            //     // UnitMat.Reset();
-            //     // UnitMat.SetRange("Academic Year Code", "Academic Year Code");
-            //     // UnitMat.SetRange("Semester Code", Semester);
-            //     // UnitMat.SetRange("Course Code", "Course Of Study");
-            //     // UnitMat.SetRange("Course Description", "Course Description");
-            //     // if UnitMat.Find('-') then begin
-            //         //repeat
-            //         // LineNo := 10000;//Set The Starting Value of Line No and Increment as the Record is generated
-            //         // UnitRegLines.Init();//Initializes the records
-            //         // UnitRegLines."Line No" += LineNo;
-            //         // UnitRegLines."Document No." := "No.";
-            //         // UnitRegLines."Unit Code" := UnitMat."Unit Code";
-            //         // UnitRegLines.Validate("Unit Code");
-            //         // UnitRegLines."Unit Core/Elective" := UnitMat."Unit Core/Elective";
-            //         // UnitRegLines.Insert();
-            //         // until UnitMat.Next() = 0;
-            //     end;
-            // end;
         }
         field(13; "Academic Year Description"; Text[100])
         {

@@ -13,11 +13,12 @@ page 60119 "Unit Registration"
         {
             group(General)
             {
-                Editable = IsEditable;
+                Enabled = IsEditable;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.';
+
                     trigger OnAssistEdit()
                     begin
                         if Rec.AssistEdit(xRec) then

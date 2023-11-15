@@ -21,9 +21,7 @@ codeunit 60100 "Workflow Event Handling CUExt"
         ReceiptApprovalRequestCancelEventDescTxt: Label 'Approval Request for Receipt Payment has been cancel';
         ReceiptReleasedEventDescTxt: Label 'Receipt Payment has been released';
 
-
-
-    //functions for Applicant registration
+    //functions for Applicant registrations
     procedure RunWorkflowOnSendApplicantRegForApprovalCode(): Code[128]
     begin
         exit(UpperCase('RunWorkflowOnSendApplicantRegForApprovalCode'));

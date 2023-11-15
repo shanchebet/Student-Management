@@ -13,14 +13,9 @@ report 60100 "Suggest Units Registration"
                 "Unit Registration".TestField(Semester);
                 "Unit Registration".TestField("Academic Year Code");
                 "Unit Registration".TestField("Course Of Study");
-
                 //Clear Unit Registration Lines
                 StudMgt.ClearUnitRegistrationLines("Unit Registration");
-
-
                 //Insert Into the Unit Registration lines from Unit Matrix Table(Record)
-
-                //Set The Starting Value of Line No and Increment as the Record is generated
                 UnitMat.Reset();
                 UnitMat.SetRange("Academic Year Code", "Academic Year Code");
                 UnitMat.SetRange("Semester Code", Semester);
@@ -29,7 +24,7 @@ report 60100 "Suggest Units Registration"
 
                 if UnitMat.Find('-') then begin
                     repeat
-                        LineNo := 10000;
+                        LineNo := 10000;//Set The Starting Value of Line No and Increment as the Record is generated
                         UnitRegLines.Init();//Initializes the records
                         UnitRegLines."Line No" += LineNo;
                         UnitRegLines."Document No." := "No.";
@@ -40,24 +35,6 @@ report 60100 "Suggest Units Registration"
                     until UnitMat.Next() = 0;
                 end;
             end;
-        }
-    }
-    requestpage
-    {
-        layout
-        {
-            area(content)
-            {
-                group(GroupName)
-                {
-                }
-            }
-        }
-        actions
-        {
-            area(processing)
-            {
-            }
         }
     }
     var

@@ -31,6 +31,7 @@ page 60106 "Student Management RoleCentre"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Applicant Registration';
                     RunObject = page "Applicant Registration";
+                    Visible = false;
                 }
                 action("Applicant Registration List")
                 {
@@ -153,11 +154,6 @@ page 60106 "Student Management RoleCentre"
                 }
                 group("Unit registration")
                 {
-                    // action("Units Registration")
-                    // {
-                    //     ApplicationArea = basic, Suite;
-                    //     RunObject = page "Unit Registration List";
-                    // }
                     action("Open Units Registration")
                     {
                         ApplicationArea = basic, Suite;
@@ -235,6 +231,7 @@ page 60106 "Student Management RoleCentre"
                         ApplicationArea = all;
                         Caption = 'Reveresed Invoice List';
                         RunObject = page "Reversed Invoice List";
+                        Visible = false;
                     }
 
                 }
@@ -277,6 +274,7 @@ page 60106 "Student Management RoleCentre"
                         ApplicationArea = all;
                         Caption = 'Reversed Receipt';
                         RunObject = page "Reversed Receipt";
+                        Visible = false;
                     }
                     action("Posted Receipt")
                     {
@@ -306,7 +304,6 @@ page 60106 "Student Management RoleCentre"
             }
             group("Setups")
             {
-
                 action("Student Management Setup")
                 {
                     ApplicationArea = Basic, Suite;

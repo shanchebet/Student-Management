@@ -28,7 +28,7 @@ table 60101 "Student Management Setup"
                 if "Maximum Age" < 0 then
                     Error('Age cannot be less than 0');
                 if "Maximum Age" < "Minimum Age" then
-                    Error('Maximu Age cannot be less than Minimum Age');
+                    Error('Maximum Age cannot be less than Minimum Age');
             end;
         }
 

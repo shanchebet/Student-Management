@@ -10,14 +10,11 @@ codeunit 60105 "Student Management"
         EmailMessage: Codeunit "Email Message";
         Recipient: text;
         Instr: InStream;
-        Oustr: OutStream;
-        TempBlob: Codeunit "Temp Blob";
         TextBuilder: TextBuilder;
         Base64Convert: Codeunit "Base64 Convert";
         RecRef: RecordRef;
         BodyTxt: Text;
         Location: Text;
-        FileName: Text;
         Subject: Text;
         File: File;
         CompInfor: Record "Company Information";
@@ -43,7 +40,6 @@ codeunit 60105 "Student Management"
             RCPTREC.Reset();
             RCPTREC.SetRange("Document No", "No.");
             RCPTREC.DeleteAll();
-
         end;
 
     end;
@@ -57,8 +53,8 @@ codeunit 60105 "Student Management"
             StdInvRec.SetRange("Document No.", "No.");
             StdInvRec.DeleteAll();
         end;
-
     end;
+
     //procedure for checking the cluster points in applicant card.
     procedure CheckClusterPointsRange(var ClusterReg: Record "Applicant Registration")
     var
@@ -89,7 +85,7 @@ codeunit 60105 "Student Management"
         AppRec: Record "Applicant Registration";
     begin
         if ApplicantRec."Approval Status" = ApplicantRec."Approval Status"::Released then begin
-
+            //clear/Reset variables
             Clear(EmailMessage);
             Clear(TextBuilder);
             Clear(Email);
@@ -103,21 +99,21 @@ codeunit 60105 "Student Management"
             if RecRef.Get(ApplicantRec.RecordId) then;
             Recipient := ApplicantRec.Email;
             Subject := 'Admission Letter';
-
-            TextBuilder.AppendLine('Dear ' + ApplicantRec."Full Name");
-            TextBuilder.AppendLine();//New Line
+            //email body
+            TextBuilder.AppendLine('Dear ' + ApplicantRec."Full Name");//New with data Line
+            TextBuilder.AppendLine();//New Blank Line
             TextBuilder.AppendLine('Find attached Admission Letter');
-            TextBuilder.AppendLine();//New Line
+            TextBuilder.AppendLine();//New Blank Line
             TextBuilder.AppendLine('Kind Regards,');
-            TextBuilder.AppendLine();//New Line
+            TextBuilder.AppendLine();//New Blank Line
             TextBuilder.AppendLine(CompInfor.Name);
 
-            BodyTxt := TextBuilder.ToText();
+            BodyTxt := TextBuilder.ToText();//converts data of textbuilder value to text
 
-            Location := TemporaryPath + 'Admission Letter.pdf';
+            Location := TemporaryPath + 'Admission Letter.pdf';//Gets the path of the directory where the temporary file is stored.
 
-            AppRec.Reset();
-            AppRec.SetRange("Application No.", ApplicantRec."Application No.");
+            AppRec.Reset();//Removes all the filters, clears any al values defined in the table
+            AppRec.SetRange("Application No.", ApplicantRec."Application No.");//sets a simple filter single value
             if AppRec.FindFirst() then;
 
             Clear(AdmissionLetter);
@@ -125,12 +121,12 @@ codeunit 60105 "Student Management"
             AdmissionLetter.SaveAsPdf(Location);
 
             File.Open(Location);
-            File.CreateInStream(Instr);
+            File.CreateInStream(Instr);//import data or read data from instream
 
-            EmailMessage.Create(Recipient, Subject, BodyTxt, false);
-            EmailMessage.AddAttachment(Location, 'pdf', Instr);
-            Email.Send(EmailMessage);
-            File.Close();
+            EmailMessage.Create(Recipient, Subject, BodyTxt, false);//Create Email Message
+            EmailMessage.AddAttachment(Location, 'pdf', Instr);//Add Attachments to the Email Message
+            Email.Send(EmailMessage);//Enable Send from Email Codeunit 
+            File.Close();//Allows to close the open file
         end;
     end;
 }

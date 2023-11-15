@@ -33,7 +33,7 @@ page 60122 "Student Session"
                 field("Student Name"; Rec."Student Name")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Stdent Name field.';
+                    ToolTip = 'Specifies the value of the Student Name field.';
                     Editable = false;
                 }
                 field("Level Of Study"; Rec."Level Of Study")
@@ -108,6 +108,7 @@ page 60122 "Student Session"
                     Rec.TestField("Semester Code");
                     Rec.TestField("Student No.");
                     Rec.Reported := true;
+                    Message('%1,you have successfully Reported For %2', Rec."Student Name", Rec."Academic Year Description");
                     Rec.Modify();
                 end;
             }

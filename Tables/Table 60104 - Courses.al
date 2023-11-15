@@ -26,12 +26,12 @@ table 60104 Courses
                 School: Record Department;
             begin
                 TestField("Course Description");
-                if School.Get("Department Code") then
+                if School.Get("Department Code") then begin
+
                     "Department Description" := School."Department Description";
-                if School.Get("Department Code") then "School Code" := School."School Code";
-                if School.Get("Department Code") then "School Description" := School."School Description";
-
-
+                    "School Code" := School."School Code";
+                    Validate("School Code");
+                end;
             end;
 
         }

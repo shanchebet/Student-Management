@@ -13,13 +13,12 @@ report 60107 "Suggest Invoice Line"
                 "Student Invoice".TestField("Course Of Study");
                 // clear the student invoice lines if it existed  before
                 StudMgt.ClearStudentInvoiceLines("Student Invoice");
-
                 Finance.Reset();
                 Finance.SetRange(Course, "Course Of Study");
                 Finance.SetRange("Academic Year", "Academic Year Code");
                 if Finance.FindSet() then begin
                     repeat
-                        lineNo := 10000;
+                        lineNo := 10000;//Set The Starting Value of Line No and Increment as the Record is generated
                         StudentInvLines.Init();
                         StudentInvLines."Line No" += lineNo;
                         StudentInvLines."Document No." := "No.";
@@ -29,9 +28,7 @@ report 60107 "Suggest Invoice Line"
                         StudentInvLines.Insert();
                     until Finance.Next() = 0;
                 end;
-
             end;
-
         }
     }
     var

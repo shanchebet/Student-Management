@@ -452,13 +452,7 @@ page 60131 "Registered Student Card"
                         Customer.SetRange("No.", Rec."No.");
                         Customer.SetFilter(Name, '%1', Rec.Name);
                         if Customer.FindFirst() then begin
-                            //     Customer.CalcFields("Balance (LCY)");
-                            //     if Customer."Balance (LCY)" < studmgmt."Maximum Fee Balance" then begin
-                            //         CustExamCard.SetTableView(Customer);
-                            //         CustExamCard.Run();
-                            //     end else
-                            //         Error('Please Clear Your Fee Balance for you to Proceed to print Exam Card!!!');
-                            // end;
+
                             studmgmt.Get();
                             Customer.CalcFields(Balance);
                             if Customer.Balance < studmgmt."Maximum Fee Balance" then begin

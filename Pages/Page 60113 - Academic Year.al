@@ -25,10 +25,6 @@ page 60113 "Academic Year"
                 }
             }
         }
-        area(Factboxes)
-        {
-
-        }
     }
 
 

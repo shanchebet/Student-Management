@@ -3,7 +3,7 @@ codeunit 60103 "Document Release"
     trigger OnRun()
     begin
     end;
-
+    //procedure used to release Units registration in the lines .
     procedure UnitRegRelease(var UnitReg: Record "Unit Registration")
     var
         UnitRecLines: Record "Unit Registration Line";
@@ -19,20 +19,6 @@ codeunit 60103 "Document Release"
             end;
         end;
     end;
-
-    // procedure ExamRegistration(var UnitReg: Record "Unit Registration")
-    // var
-    //     Cust: Record Customer;
-    //     StdMgtSetup: Record "Student Management Setup";
-    // begin
-    //     with UnitReg do begin
-    //         StdMgtSetup.Get();
-    //         Cust.Get("Student No.");
-    //         Cust.CalcFields(Balance);
-    //         if Cust.Balance > StdMgtSetup."Minimum Fee Balance" then
-    //             Error('Fee Balance Should be less or Equal to %1', StdMgtSetup."Minimum Fee Balance");
-    //     end;
-    // end;
 
     procedure UnitRegReopen(var UnitReg: Record "Unit Registration Line")
     begin
@@ -112,10 +98,7 @@ codeunit 60103 "Document Release"
     begin
         ApplicantRec."Approval Status" := ApplicantRec."Approval Status"::Open;
         ApplicantRec.Modify();
-
-
     end;
-
 
     procedure CreateApplicant(ApplicantRec: Record "Applicant Registration")
     var

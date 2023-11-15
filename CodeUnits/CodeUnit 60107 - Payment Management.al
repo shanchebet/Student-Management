@@ -11,7 +11,7 @@ codeunit 60107 Payments
 
     procedure PostReceipt(Receipt: Record "Receipt Header")
     var
-        // fetches the record from a certain table
+        // fetches the record from a certain table variables
         StudMgmt: Record "Student Management Setup";
         JnLBatch: Record "Gen. Journal Batch";
         LineNo: Integer;
@@ -21,35 +21,38 @@ codeunit 60107 Payments
 
     begin
         With Receipt do begin
+            //Dialogue box that prompt one for yes or no.
             if Not Confirm(Label2, false, "No.") then
                 exit;
             if Posted then
                 Error(Label1, "No.");
             StudMgmt.Get();
-            // Tests the Important Filds
+            // step 1 : Tests fields of all the important fields not to be blank or Zero in Student Management Setup
             StudMgmt.TestField("General Journal Batch");
             StudMgmt.TestField("General Journal Template");
+
             TestField("Receiving Bank Account");
 
-            //create the batch using the document
+            // Step 2:  Create a Gen Journal batch using the document No and Template Using "General Journal Template" from StudentMgt
             JnlBatch.Init;
             JnlBatch."Journal Template Name" := StudMgmt."General Journal Template";
             JnlBatch.Name := "No.";
+            //If the Gen Journal batch does not Exist it Inserts/Creates
             if not JnlBatch.Get(StudMgmt."General Journal Template", "No.") then
                 JnlBatch.Insert;
-            // code that will loop through to insert the Receipt Lines for payment.
+            // Step 3: Delete/Reset the lines with the Same Batch Name and Template Name if Exist in Gen Journal Lines Before inserting
             GenJnlLine.Reset;
             GenJnlLine.SetRange(GenJnlLine."Journal Template Name", StudMgmt."General Journal Template");
             GenJnlLine.SetRange(GenJnlLine."Journal Batch Name", "No.");
             GenJnlLine.DeleteAll;
             begin
                 //cr Customer/Student.
-
+                //Setting the range for Receipt Lines with the Receipt Header Record so as to insert into Journal Line all the Record From Receipt Lines
                 ReceiptLines.Reset();
                 ReceiptLines.SetRange("Document No", "No.");
                 if ReceiptLines.Find('-') then begin
                     repeat
-                        LineNo := LineNo + 10000;
+                        LineNo := LineNo + 10000;// Increment LineNo by 10000 so as to avoid Existing Record for Same Record
                         GenJnlLine.Init;
                         GenJnlLine."Journal Template Name" := JnlBatch."Journal Template Name";
                         GenJnlLine."Journal Batch Name" := JnlBatch.Name;
@@ -76,12 +79,12 @@ codeunit 60107 Payments
 
                 end;
             end;
-            // used for Posting the document passing the lines for posting.
+            // step 4: This passes the lines for posting 
             GenJnlLine.Reset;
             GenJnlLine.SetRange("Journal Template Name", StudMgmt."General Journal Template");
             GenJnlLine.SetRange("Journal Batch Name", "No.");
             CODEUNIT.Run(CODEUNIT::"Gen. Jnl.-Post Batch", GenJnlLine);
-            //When Posted It sets the boolean for posting to be True.
+            // step 5: modify when posted and set the posted boolean to be posted.if the record exist in GL Register
             GLRegister.Reset;
             GLRegister.SetRange("Journal Batch Name", "No.");
             if GLRegister.Find('-') then begin

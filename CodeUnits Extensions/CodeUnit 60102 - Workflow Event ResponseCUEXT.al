@@ -134,7 +134,7 @@ codeunit 60102 "Workflow Event Response CUEXT"
 
                     Receipt.SetView(RecRef.GetView());
                     Handled := true;
-                    ReleaseDoc.InvoiceReopen(VarVariant);
+                    ReleaseDoc.ReceiptReopen(VarVariant);
                 end;
         end;
     end;
